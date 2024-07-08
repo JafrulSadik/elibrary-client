@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import SearchIcon from "../../public/icons/search-icon";
+import SearchIcon from "../../../public/icons/search-icon";
 
 const SearchForm = () => {
   const [search, setSearch] = useState("");

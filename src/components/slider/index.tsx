@@ -5,12 +5,12 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import Image from "next/image";
-import HeroImg from "./../../public/images/hero-1.png";
+import HeroImg from "./../../../public/images/hero-1.png";
 // Import Swiper React components
 
 const Slider = () => {
   return (
-    <div className="w-[90%] max-w-7xl">
+    <div className="w-[90%] max-w-7xl my-2 md:my-10 ">
       <Swiper className="mySwiper container">
         <SwiperSlide className="flex justify-center items-center">
           <div className="flex items-center gap-2 md:gap-8">

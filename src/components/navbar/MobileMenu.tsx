@@ -2,10 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import Logo from "../../public/images/logo.png";
+import Logo from "../../../public/images/logo.png";
 
 const MobileMenu = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="flex relative h-full items-center justify-center">
       <div className="flex justify-between w-[80%] items-center">
@@ -49,7 +49,7 @@ const MobileMenu = () => {
       </div>
 
       {isOpen && (
-        <div className="absolute left-0 top-16 w-full h-[calc(100vh-64px)] bg-[#ffffffb1] backdrop-blur-md flex flex-col items-center justify-center gap-8 font-normal text-base  z-10">
+        <div className="absolute left-0 top-16 w-full h-[calc(100vh-64px)] bg-[#ffffffb1] backdrop-blur-md flex flex-col items-center justify-center gap-8 font-normal text-base  z-30">
           <Link href="/">Home</Link>
           <Link href="/">Category</Link>
           <Link href="/">Your Books</Link>

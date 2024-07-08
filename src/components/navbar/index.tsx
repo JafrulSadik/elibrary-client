@@ -1,5 +1,6 @@
 "use-client";
 
+import Link from "next/link";
 import MobileMenu from "./MobileMenu";
 import SearchForm from "./SearchForm";
 
@@ -10,9 +11,12 @@ const Navbar = () => {
       <div className="hidden max-w-7xl w-[90%]  md:flex container justify-between items-center h-24">
         {/* Left Section */}
         <div className="flex-1">
-          <h1 className=" text-crusta-500 text-[16px]  font-bold text-lg ">
+          <Link
+            href="/"
+            className=" text-crusta-500 text-[16px]  font-bold text-lg "
+          >
             e-library
-          </h1>
+          </Link>
         </div>
 
         {/* Middle Section */}
@@ -22,18 +26,20 @@ const Navbar = () => {
 
         {/* Right Section */}
         <div className="flex justify-end flex-1  gap-2">
-          <button
+          <Link
+            href="/auth/login"
             type="submit"
-            className="px-6 h-10 font-normal text-crusta-400 hover:border border-crusta-400 rounded-md"
+            className="flex justify-center items-center px-6 h-10 font-normal text-crusta-400 hover:border border-crusta-400 rounded-md"
           >
             Login
-          </button>
-          <button
+          </Link>
+          <Link
+            href="/auth/register"
             type="submit"
-            className="px-6 h-10 text-white rounded-md font-normal bg-gradient-to-b from-crusta-500 to-crusta-600 hover:bg-none hover:text-crusta-600 hover:border border-crusta-600"
+            className="flex justify-center items-center px-6 h-10 text-white rounded-md font-normal bg-gradient-to-b from-crusta-500 to-crusta-600 hover:bg-none hover:text-crusta-600 hover:border border-crusta-600"
           >
             Register
-          </button>
+          </Link>
         </div>
       </div>
 
