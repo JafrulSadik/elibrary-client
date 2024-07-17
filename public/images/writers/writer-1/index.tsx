@@ -8,7 +8,6 @@ type Props = {
 };
 
 const WriterImgOne = (props: Props) => {
-  console.log(props);
   return <Image src={WriterImg} alt="" {...props} />;
 };
 
