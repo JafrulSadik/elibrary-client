@@ -5,12 +5,24 @@ import { FaRegStar, FaStar } from "react-icons/fa6";
 import { ImCross } from "react-icons/im";
 import AddReviewButton from "../add-review-btn";
 
-const AddReview = () => {
+type Props = {
+  isLoggedIn: boolean;
+};
+
+const AddReview = (props: Props) => {
+  const { isLoggedIn } = props;
   const [reviewModal, setReviewModal] = useState<boolean>(false);
+
+  const handleReviewModal = () => {
+    setReviewModal((prev) => !prev);
+  };
 
   return (
     <div>
-      <AddReviewButton setReviewModal={setReviewModal} />
+      <AddReviewButton
+        handleReviewModal={handleReviewModal}
+        isLoggedIn={isLoggedIn}
+      />
       {reviewModal && (
         <div className=" fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#291515bb] backdrop-blur-sm z-20">
           <div className="flex flex-col bg-crusta-400 shadow-md justify-center  w-96 mx-6 rounded-md p-5 gap-4 relative">

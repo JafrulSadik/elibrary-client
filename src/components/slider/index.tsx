@@ -23,7 +23,7 @@ const Slider = () => {
                 Unlock a World of Knowledge withOur Extensive Collection of
                 High-Quality PDF Books Across Various Categories.
               </p>
-              <button className="text-[10px] text-light md:text-bold md:text-[16px] py-1 md:py-2 bg-crusta-500 hover:bg-crusta-600 font-light text-white rounded-md w-14 md:w-24">
+              <button className="text-[10px] text-light md:text-bold md:text-[16px] py-1 md:py-2  shadow-md bg-gradient-to-t from-crusta-500 to-crusta-400 hover:bg-crusta-600 font-light text-white rounded-md w-14 md:w-24">
                 Purchase
               </button>
             </div>

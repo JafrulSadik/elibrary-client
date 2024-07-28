@@ -2,9 +2,14 @@ import Link from "next/link";
 import { FaRegStar, FaStar } from "react-icons/fa6";
 import WriterImgOne from "../../../../../../public/images/writers/writer-1";
 import WriterImgTwo from "../../../../../../public/images/writers/writer-2";
+import { auth } from "../../../../../lib/auth";
 import AddReview from "../add-review";
 
-const Reviews = () => {
+const Reviews = async () => {
+  const session = await auth();
+
+  const isLoggedIn = !!session?.user;
+
   return (
     <div className="flex flex-col items-center max-w-7xl w-[90%] shadow-sm rounded-md pt-14 mb-10 border border-gray-200">
       <div className="w-[90%] flex flex-col">
@@ -100,8 +105,7 @@ const Reviews = () => {
 
         {/* Write a review */}
         <div className="flex w-full justify-center my-6">
-          {" "}
-          <AddReview />
+          <AddReview isLoggedIn={isLoggedIn} />
         </div>
 
         <hr className="h-[0.5px] bg-gray-300 my-8" />

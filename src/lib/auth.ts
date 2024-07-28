@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import { config } from "../config/config";
 import { getIsTokenValid } from "./session-checker";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -21,7 +22,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             throw new Error("All the fields are required.");
 
           const response: any = await fetch(
-            `${process.env.BASE_URL}/api/v1/auth/login`,
+            `${config.baseUrl}/api/v1/auth/login`,
             {
               method: "POST",
               headers: {

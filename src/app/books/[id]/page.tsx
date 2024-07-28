@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa6";
 import CoverImg from "../../../../public/images/books/Stay with me.jpg";
 import DownloadBtn from "../../../components/buttons/download-btn";
 import PreviewBtn from "../../../components/buttons/preview-btn";
-import BookSpec from "./components/book-spec/BookSpec";
+import BookSpec from "./components/book-spec";
 import Reviews from "./components/review-rating/Reviews";
 
 const page = () => {
