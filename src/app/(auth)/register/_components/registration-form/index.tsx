@@ -3,8 +3,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { RiLoader2Line } from "react-icons/ri";
 import { z } from "zod";
 import { userRegistration } from "../../../../action";
 
@@ -42,6 +44,7 @@ export type RegistrationFormType = z.infer<typeof RegistraionFormSchema>;
 
 const RegisterForm = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const notify = () => {
     toast.success("Signup successfull. Please login.", {
@@ -69,6 +72,7 @@ const RegisterForm = () => {
 
   const onSubmit: SubmitHandler<RegistrationFormType> = async (formData) => {
     try {
+      setLoading(true);
       const response = await userRegistration(formData);
       if (response.code === 201) {
         notify();
@@ -78,6 +82,7 @@ const RegisterForm = () => {
           message: response.message,
         });
       }
+      setLoading(false);
     } catch (error: any) {
       setError("root", {
         message: error.message,
@@ -177,10 +182,14 @@ const RegisterForm = () => {
         </p>
       )}
       <button
-        className={`w-full p-2 text-white border  rounded-md bg-crusta-950`}
+        className={`w-full flex justify-center items-center gap-2 p-2 text-white border ${
+          loading ? "bg-crusta-200" : "bg-crusta-950"
+        }  rounded-md`}
         type="submit"
+        disabled={loading}
       >
-        Sign Up
+        {loading && <RiLoader2Line className="animate-spin" size={16} />}
+        <span>Sign Up</span>
       </button>
       <p className="text-sm text-center my-4">
         Already have an account ? <Link href="/login">Login</Link>

@@ -3,8 +3,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { RiLoader2Line } from "react-icons/ri";
 import { z } from "zod";
 import { loginWithCredintial } from "../../../../action";
 
@@ -17,6 +19,7 @@ export type LoginSchemaType = z.infer<typeof LoginSchema>;
 
 const LoginForm = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const {
     handleSubmit,
     register,
@@ -40,6 +43,8 @@ const LoginForm = () => {
 
   const onSubmit: SubmitHandler<LoginSchemaType> = async (formData) => {
     try {
+      setLoading(true);
+
       const response: any = await loginWithCredintial(formData);
       if (!!response) {
         setError("root", {
@@ -49,6 +54,7 @@ const LoginForm = () => {
         notify();
         router.refresh();
       }
+      setLoading(false);
     } catch (error: any) {
       setError("root", {
         message: "Something went wrong.",
@@ -97,10 +103,14 @@ const LoginForm = () => {
         </p>
       )}
       <button
-        className="w-full p-2 text-white border bg-crusta-950  rounded-md"
+        className={`w-full flex justify-center items-center gap-2 p-2 text-white border ${
+          loading ? "bg-crusta-200" : "bg-crusta-950"
+        }  rounded-md`}
         type="submit"
+        disabled={loading}
       >
-        Sign In
+        {loading && <RiLoader2Line className="animate-spin" size={16} />}
+        <span>Sign In</span>
       </button>
       <p className="text-sm text-center my-4">
         Don't have an account ? <Link href="/register">Register</Link>
