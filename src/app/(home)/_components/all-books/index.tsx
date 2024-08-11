@@ -15,7 +15,7 @@ const AllBooks = () => {
         <Swiper
           slidesPerView={1}
           breakpoints={{
-            400: {
+            300: {
               slidesPerView: 2,
               spaceBetween: 10,
             },
@@ -32,22 +32,40 @@ const AllBooks = () => {
               spaceBetween: 30,
             },
           }}
-          spaceBetween={10}
+          spaceBetween={5}
           className="my-2"
         >
-          <SwiperSlide className="flex justify-center p-2">
+          <SwiperSlide className="flex justify-center">
             <Card />
           </SwiperSlide>
-          <SwiperSlide className="flex justify-center p-2">
+          <SwiperSlide className="flex justify-center">
             <Card />
           </SwiperSlide>
-          <SwiperSlide className="flex justify-center p-2">
+          <SwiperSlide className="flex justify-center">
             <Card />
           </SwiperSlide>
-          <SwiperSlide className="flex justify-center p-2">
+          <SwiperSlide className="flex justify-center">
             <Card />
           </SwiperSlide>
-          <SwiperSlide className="flex justify-center p-2">
+          <SwiperSlide className="flex justify-center">
+            <Card />
+          </SwiperSlide>
+          <SwiperSlide className="flex justify-center">
+            <Card />
+          </SwiperSlide>
+          <SwiperSlide className="flex justify-center">
+            <Card />
+          </SwiperSlide>
+          <SwiperSlide className="flex justify-center">
+            <Card />
+          </SwiperSlide>
+          <SwiperSlide className="flex justify-center">
+            <Card />
+          </SwiperSlide>
+          <SwiperSlide className="flex justify-center">
+            <Card />
+          </SwiperSlide>
+          <SwiperSlide className="flex justify-center">
             <Card />
           </SwiperSlide>
         </Swiper>

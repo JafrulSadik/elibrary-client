@@ -4,7 +4,7 @@ import WriterCard2 from "../../components/writer-card/extra/WriterCard";
 import WriterCard1 from "../../components/writer-card/extra/WriterCard1";
 import { auth } from "../../lib/auth";
 import AllBooks from "./_components/all-books";
-import Category from "./_components/category";
+import CategorySect from "./_components/category-sect";
 import LatestBooks from "./_components/latest-books";
 import PopularBooks from "./_components/popular-books";
 
@@ -32,7 +32,7 @@ export default async function Home() {
       </div>
 
       {/* Books category */}
-      <Category />
+      <CategorySect />
 
       {/* Top writers */}
       <div className="flex flex-col items-center bg-crusta-950 pt-8 pb-14 w-full">
