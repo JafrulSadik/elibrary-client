@@ -15,7 +15,7 @@ const menuItems = [
   },
   {
     title: "Add a book",
-    path: "/dashboard/upload",
+    path: "/dashboard/add-book",
   },
 ];
 

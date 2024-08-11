@@ -5,7 +5,7 @@ import CoverImg from "../../../public/images/books/Stay with me.jpg";
 
 const Card = () => {
   return (
-    <div className="flex flex-col bg-white rounded-lg w-36 h-56  md:w-44 md:h-64 shadow-md border-x border-x-gray-200 ">
+    <div className="flex flex-col bg-white rounded-lg max-w-36  md:max-w-44 md:h-64 shadow-md">
       {/* Image div */}
       <div className="w-full">
         <div className="overflow-hidden relative flex justify-center rounded-t-md">

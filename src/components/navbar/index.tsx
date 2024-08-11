@@ -63,7 +63,7 @@ const Navbar = async () => {
       </div>
 
       <div className="h-16 w-full md:hidden">
-        <MobileMenu />
+        <MobileMenu user={session ? session.user : ""} />
       </div>
     </div>
   );

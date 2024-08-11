@@ -1,0 +1,40 @@
+export type Book = {
+  _id: string;
+  title: string;
+  genre: string;
+  cover: string;
+  description: string;
+  author: {
+    _id: string;
+    name: string;
+  };
+  status: "pending" | "approved" | "blocked" | "decline";
+  downloads: number;
+  file: string;
+  prevStart?: number;
+  prevEnd?: number;
+  previewFile?: string;
+  price?: number;
+  totalRating: number;
+  numOfRating: number;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type PaginationType = {
+  next: null | number;
+  page: number;
+  prev: null | number;
+  totalPage: number;
+};
+
+export type GetUserBooksProps = {
+  page: number;
+};
+
+export type GetBooksProps = {
+  page: number;
+  sortBy: string;
+  sortType: string;
+  apiUrl: string;
+};

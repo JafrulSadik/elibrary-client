@@ -55,7 +55,7 @@ const LoginForm = () => {
         router.refresh();
       }
       setLoading(false);
-    } catch (error: any) {
+    } catch (error) {
       setError("root", {
         message: "Something went wrong.",
       });
