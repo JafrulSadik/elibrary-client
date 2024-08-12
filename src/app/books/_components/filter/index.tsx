@@ -1,15 +1,20 @@
 type Props = {
   handleSortBy: Function;
   handleSortType: Function;
+  sortBy: string | null;
+  sortType: string | null;
+  booksCount: number;
+  search: string | null;
 };
 
 const FilterSect = (props: Props) => {
-  const { handleSortBy, handleSortType } = props;
+  const { handleSortBy, handleSortType, sortBy, sortType, booksCount, search } =
+    props;
 
   return (
     <div className="flex flex-col gap-1 md:flex-row items-center justify-between w-full ">
       <h1 className="flex font-semibold text-sm md:text-base md:justify-between">
-        Showing 125 books for{" "}
+        {`Showing ${booksCount} books for  ${search || ""}`}
       </h1>
       <div className="flex flex-col gap-2 text-xs md:text-sm md:flex-row">
         <div className="flex items-center gap-2">
@@ -17,6 +22,7 @@ const FilterSect = (props: Props) => {
           <select
             className="border border-gray-300 rounded-md outline-none py-1 px-3"
             onChange={(event) => handleSortBy(event.target.value)}
+            defaultValue={sortBy || ""}
           >
             <option value="" className="p-5">
               default
@@ -33,6 +39,7 @@ const FilterSect = (props: Props) => {
           <select
             className="border border-gray-300 rounded-md outline-none py-1 px-3"
             onChange={(event) => handleSortType(event.target.value)}
+            defaultValue={sortType || ""}
           >
             <option value="" className="p-5">
               default

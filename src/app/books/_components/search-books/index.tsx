@@ -1,44 +1,70 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import Pagination from "../../../../components/pagination";
+import { ApiSuccessfullResponse } from "../../../../types/ApiResponse";
+import { Book, PaginationType } from "../../../../types/Book";
 import { getBooks } from "../../../action";
 import AllBooks from "../all-books";
 import FilterSect from "../filter";
 import SideBar from "../side-bar";
+let count = 0;
 
 const SearchBooks = () => {
-  const searchParams = useSearchParams();
   const router = useRouter();
-  const baseUrl = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  // const sortBy = searchParams.get("searchBy") && "";
-  // const sortType = searchParams.get("searchType") && "";
-  // const s = searchParams.get("s") && "";
-  // const page = searchParams.get("page") && 1;
+  const [page, setPage] = useState(1);
+  const [data, setData] = useState<Book[]>([]);
+  const [totalPage, setTotalPage] = useState(0);
+  const [loading, setLoading] = useState(false);
 
-  console.log({ baseUrl });
-
-  const handleSortBy = (props: string) => {
-    // rou
+  const handleSortBy = (sortby: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (sortby) {
+      params.set("sort_by", sortby);
+    } else {
+      params.delete("sort_by");
+    }
+    router.push(`${pathname}?${params.toString()}`);
   };
 
-  const handleSortType = (props: string) => {
-    // setSortType(props);
+  const handleSortType = (sortType: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (sortType) {
+      params.set("sort_type", sortType);
+    } else {
+      params.delete("sort_type");
+    }
+    router.push(`${pathname}?${params.toString()}`);
   };
 
-  const fetchData = async () => {
-    // setLoading(true);
-    const response = await getBooks();
-
-    // const { data, pagination } = response;
-    // setData(data);
-    // setTotalPage(pagination.totalPage);
-    // setLoading(false);
+  const handlePageNumber = (props: { selected: number }) => {
+    const page = props.selected + 1;
+    const params = new URLSearchParams(searchParams);
+    params.set("page", page.toString());
+    router.push(`${pathname}?${params.toString()}`);
   };
 
-  useEffect(() => {}, []);
+  const fetchData = async (searchUrl: string) => {
+    setLoading(true);
+    const response = (await getBooks({ searchUrl })) as ApiSuccessfullResponse<
+      Book,
+      PaginationType
+    >;
+
+    const { data, pagination } = response;
+    setData(data);
+    setTotalPage(pagination.totalPage);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    const searchQuery = window.location.search;
+    fetchData(searchQuery);
+  }, [searchParams]);
 
   return (
     <div className="flex flex-col max-w-7xl w-[90%] mb-10">
@@ -46,6 +72,10 @@ const SearchBooks = () => {
         <FilterSect
           handleSortBy={handleSortBy}
           handleSortType={handleSortType}
+          sortBy={searchParams.get("sort_by")}
+          sortType={searchParams.get("sort_type")}
+          booksCount={data.length}
+          search={searchParams.get("search")}
         />
       </div>
       <div className="flex gap-3">
@@ -55,11 +85,13 @@ const SearchBooks = () => {
         </div>
         {/* All Books */}
         <div className="w-full lg:flex-[0.8] ">
-          <AllBooks />
+          <AllBooks books={data} />
+
+          {/* Pagination */}
           <div className="flex justify-around mt-8">
             <Pagination
-              pageCount={15}
-              handlePageNumber={() => ""}
+              pageCount={totalPage}
+              handlePageNumber={handlePageNumber}
               pageRangeDisplayed={2}
             />
           </div>
