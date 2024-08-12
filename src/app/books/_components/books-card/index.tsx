@@ -1,30 +1,46 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
-import CoverImg from "../../../../../public/images/books/Stay with me.jpg";
+import { Book } from "../../../../types/Book";
 
-const AllBooksCard = () => {
+type Props = {
+  book: Book;
+};
+
+const AllBooksCard = (props: Props) => {
+  const { book } = props;
+
   return (
-    <div className="flex flex-col bg-white rounded-lg max-w-[160px] md:h-64 shadow-md border-x border-x-gray-200 ">
+    <div className="max-h-64 bg-white rounded-lg max-w-[160px] shadow-md border-x border-x-gray-200 ">
       {/* Image div */}
-      <div className="w-full auto">
+      <div className="w-full">
         <div className="overflow-hidden relative flex justify-center rounded-t-md">
           <Image
-            src={CoverImg}
+            src={book?.cover}
             alt=""
-            className=" object-conver w-[60%] blur-2xl "
+            height="0"
+            width="0"
+            className="absolute object-conver w-full blur-2xl "
           />
-          <Image src={CoverImg} alt="" className="absolute w-[60%]  z-20 " />
+          <Image
+            src={book?.cover}
+            alt=""
+            height={100}
+            width={60}
+            className="w-[55%]  z-20 object-contain"
+          />
         </div>
       </div>
 
       {/* Others */}
       <div className="text-sm mx-4 my-2 gap-3">
         <Link href="/books/1" className="font-bold text-black">
-          Stay With Me
+          {book?.title}
         </Link>
-        <p className="font-normal text-gray-400">Symon Alex</p>
-        <p className="font-light text-green-500">Free</p>
+        <p className="font-normal text-gray-400">{book?.author?.name}</p>
+        <p className="font-light text-green-500 text-sm">
+          Downloads ({book?.downloads})
+        </p>
         <div className="flex gap-1 text-yellow-500">
           <FaStar />
           <FaStar />
