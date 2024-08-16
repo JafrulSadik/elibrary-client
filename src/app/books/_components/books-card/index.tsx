@@ -13,7 +13,7 @@ const AllBooksCard = (props: Props) => {
   return (
     <div className="max-h-64 bg-white rounded-lg max-w-[160px] shadow-md border-x border-x-gray-200 ">
       {/* Image div */}
-      <div className="w-full">
+      <div className="flex-[0.5]">
         <div className="overflow-hidden relative flex justify-center rounded-t-md">
           <Image
             src={book?.cover}
@@ -33,7 +33,7 @@ const AllBooksCard = (props: Props) => {
       </div>
 
       {/* Others */}
-      <div className="text-sm mx-4 my-2 gap-3">
+      <div className="flex flex-col text-sm mx-4 gap-1 py-2">
         <Link href="/books/1" className="font-bold text-black">
           {book?.title}
         </Link>

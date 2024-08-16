@@ -1,10 +1,11 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import SearchIcon from "../../../public/icons/search-icon";
 
 const SearchForm = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const searchTerm = searchParams.get("search");
@@ -12,14 +13,13 @@ const SearchForm = () => {
 
   const handleSubmit = () => {
     const params = new URLSearchParams(searchParams);
-    params.set("search", search);
-    router.push(`/books?${params.toString()}`);
+    if (search) {
+      params.set("search", search);
+    } else {
+      params.delete("search");
+    }
+    router.push(`${pathname}?${params.toString()}`);
   };
-
-  useEffect(() => {
-    const searchTerm = searchParams.get("search");
-    setSearch(searchTerm || "");
-  }, [searchParams]);
 
   return (
     <form

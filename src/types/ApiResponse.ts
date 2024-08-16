@@ -4,3 +4,9 @@ export type ApiSuccessfullResponse<TData, TPagination> = {
   data: TData[];
   pagination: TPagination;
 };
+
+export type AddReviewResponse<TData> = {
+  code: number;
+  message: string;
+  data: TData;
+};

@@ -38,3 +38,13 @@ export type GetBooksProps = {
   sortType: string;
   apiUrl: string;
 };
+
+export type Reviews = {
+  bookId: string;
+  authorId: string;
+  rating?: number;
+  comment?: string;
+  _id: string;
+  createdAt: Date;
+  updatedAt: Date;
+};

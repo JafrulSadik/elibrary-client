@@ -42,7 +42,7 @@ const SearchBooks = () => {
   };
 
   const handlePageNumber = (props: { selected: number }) => {
-    const page = props.selected + 1;
+    setPage(props.selected + 1);
     const params = new URLSearchParams(searchParams);
     params.set("page", page.toString());
     router.push(`${pathname}?${params.toString()}`);
