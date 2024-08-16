@@ -1,8 +1,22 @@
 "use server";
 import { config } from "../../config/config";
 import { auth } from "../../lib/auth";
-import { ApiSuccessfullResponse } from "../../types/ApiResponse";
-import { Book, GetUserBooksProps, PaginationType } from "../../types/Book";
+import {
+  AddReviewResponse,
+  ApiSuccessfullResponse,
+} from "../../types/ApiResponse";
+import {
+  Book,
+  GetUserBooksProps,
+  PaginationType,
+  Reviews,
+} from "../../types/Book";
+
+type ReviewProps = {
+  rating: number | null;
+  review: string | null;
+  bookId: string;
+};
 
 export const createBook = async (formData: FormData) => {
   const session = await auth();
@@ -49,12 +63,7 @@ export const getUserBooks = async (props: GetUserBooksProps) => {
 };
 
 export const getBooks = async ({ searchUrl }: { searchUrl: string }) => {
-  // const { page, apiUrl } = props;
   try {
-    const session = await auth();
-    console.log(`${config.baseUrl}/api/v1/books/${searchUrl}`);
-
-    // console.log(apiUrl);
     const response = await fetch(`${config.baseUrl}/api/v1/books/${searchUrl}`);
 
     if (!response.ok) {
@@ -67,5 +76,54 @@ export const getBooks = async ({ searchUrl }: { searchUrl: string }) => {
     return data;
   } catch (error) {
     throw new Error("Failed to fatch data.");
+  }
+};
+
+export const deleteBook = async ({ bookId }: { bookId: string }) => {
+  try {
+    const session = await auth();
+    const response = await fetch(`${config.baseUrl}/api/v1/books/${bookId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: session?.tokens?.accessToken || "",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete the book.");
+    }
+    return "";
+  } catch (error) {
+    throw new Error("Failed to delete the book.");
+  }
+};
+
+export const addReview = async (props: ReviewProps) => {
+  const { bookId, review, rating } = props;
+  try {
+    const session = await auth();
+    const response = await fetch(
+      `${config.baseUrl}/api/v1/books/${bookId}/reviews`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          Authorization: session?.tokens?.accessToken || "",
+        },
+        body: JSON.stringify({
+          comment: review || "",
+          rating: rating,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to add review.");
+    }
+
+    const data = (await response.json()) as AddReviewResponse<Reviews>;
+    return data;
+  } catch (error) {
+    throw new Error("Failed to add review.");
   }
 };

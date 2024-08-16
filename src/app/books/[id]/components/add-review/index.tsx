@@ -1,8 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { FaRegStar, FaStar } from "react-icons/fa6";
-import { ImCross } from "react-icons/im";
+import { FaStar } from "react-icons/fa6";
+import { ImCross, ImSpinner2 } from "react-icons/im";
+import { notify } from "../../../../../lib/notify";
+import { AddReviewResponse } from "../../../../../types/ApiResponse";
+import { Reviews } from "../../../../../types/Book";
+import { addReview } from "../../../../action";
 import AddReviewButton from "../add-review-btn";
 
 type Props = {
@@ -11,10 +15,39 @@ type Props = {
 
 const AddReview = (props: Props) => {
   const { isLoggedIn } = props;
-  const [reviewModal, setReviewModal] = useState<boolean>(false);
+  const [rating, setRating] = useState(0);
+  const [review, setReview] = useState("");
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [reviewModal, setReviewModal] = useState(false);
 
   const handleReviewModal = () => {
     setReviewModal((prev) => !prev);
+  };
+
+  const handleReview = async () => {
+    if (!review && !rating) {
+      setError(true);
+      setErrorMessage("* Review or rating is required.");
+    } else {
+      setLoading(true);
+      const response = (await addReview({
+        review,
+        rating,
+        bookId: "66bbd430411f475a5c07acf8",
+      })) as AddReviewResponse<Reviews>;
+
+      if (response.code === 201) {
+        notify({ message: "Review added successfully" });
+        setLoading(false);
+        setReviewModal(false);
+      } else {
+        setLoading(false);
+        setError(true);
+        setErrorMessage(response.message);
+      }
+    }
   };
 
   return (
@@ -24,30 +57,48 @@ const AddReview = (props: Props) => {
         isLoggedIn={isLoggedIn}
       />
       {reviewModal && (
-        <div className=" fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#291515bb] backdrop-blur-sm z-20">
-          <div className="flex flex-col bg-crusta-400 shadow-md justify-center  w-96 mx-6 rounded-md p-5 gap-4 relative">
+        <div className="fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#291515bb] backdrop-blur-sm z-20">
+          <form
+            action={handleReview}
+            className="flex flex-col bg-crusta-400 shadow-md justify-center  w-96 mx-6 rounded-md p-5 gap-4 relative"
+          >
             <h1 className="text-lg text-[#ffffffb4] text-center rounded-md font-bold">
               Add Review
             </h1>
-            <div className="flex justify-center text-3xl md:text-4xl  lg:text-5xl text-crusta-900">
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaRegStar />
+            <div className="flex justify-center text-3xl md:text-4xl  lg:text-5xl">
+              {[...Array(5)].map((star, index) => (
+                <FaStar
+                  className={`${
+                    index < rating ? "fill-yellow-300" : "fill-crusta-300"
+                  }`}
+                  onClick={() => setRating(index + 1)}
+                  key={index}
+                />
+              ))}
             </div>
             <textarea
               name=""
               id=""
               placeholder="Enter you opinion"
+              onChange={(e) => setReview(e.target.value)}
               className="rounded-md outline-none p-4 h-32 text-gray-800 scroll-m-0"
               maxLength={400}
             ></textarea>
+            {error && (
+              <p className="text-sm text-red-700 font-semibold">
+                {errorMessage}
+              </p>
+            )}
             <button
-              className="p-4 text-white bg-crusta-300 hover:bg-crusta-350 rounded-md"
-              onClick={() => setReviewModal((prev) => !prev)}
+              className="p-4 flex items-center justify-center gap-2 text-white bg-crusta-300 hover:bg-crusta-350 rounded-md"
+              type="submit"
             >
-              Submit
+              {loading && (
+                <span className="animate-spin">
+                  <ImSpinner2 size={18} />
+                </span>
+              )}
+              <span>Submit</span>
             </button>
 
             <button
@@ -56,7 +107,7 @@ const AddReview = (props: Props) => {
             >
               <ImCross />
             </button>
-          </div>
+          </form>
         </div>
       )}
     </div>
