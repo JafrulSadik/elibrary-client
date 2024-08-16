@@ -1,11 +1,10 @@
 "use client";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import SearchIcon from "../../../public/icons/search-icon";
 
 const SearchForm = () => {
   const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const searchTerm = searchParams.get("search");
@@ -18,7 +17,7 @@ const SearchForm = () => {
     } else {
       params.delete("search");
     }
-    router.push(`${pathname}?${params.toString()}`);
+    router.push(`/books?${params.toString()}`);
   };
 
   return (
