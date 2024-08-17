@@ -120,11 +120,13 @@ const DataTable = () => {
           <p>Genre</p>
         </div>
       ),
-      cell: (info) => (
-        <div className="hidden lg:block">
-          <p className="truncate">{info.getValue()}</p>
-        </div>
-      ),
+      cell: (info) => {
+        return (
+          <div className="hidden lg:block">
+            <p className="truncate">{info.getValue().title}</p>
+          </div>
+        );
+      },
     }),
     columnHelper.accessor("_id", {
       header: () => "Action",
