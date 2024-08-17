@@ -1,40 +1,52 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
-import CoverImg from "../../../public/images/books/Stay with me.jpg";
+import { Book } from "../../types/Book";
 
-const Card = () => {
+type Props = {
+  book: Book;
+};
+
+const Card = (props: Props) => {
+  const { book } = props;
+
   return (
-    <div className="flex flex-col bg-white rounded-lg max-w-36  md:max-w-44 md:h-64 shadow-md">
+    <div className="flex flex-col bg-white rounded-md w-full max-w-36  md:max-w-40 md:h-64 shadow-md">
       {/* Image div */}
-      <div className="w-full">
-        <div className="overflow-hidden relative flex justify-center rounded-t-md">
-          <Image
-            src={CoverImg}
-            alt=""
-            className=" object-conver blur-2xl w-20 md:w-[100px] "
-          />
-          <Image
-            src={CoverImg}
-            alt=""
-            className="absolute  w-20 md:w-[100px] z-20 "
-          />
-        </div>
+      <div className="overflow-hidden relative flex justify-center rounded-t-md">
+        <Image
+          src={book?.cover}
+          alt=""
+          height="0"
+          width="0"
+          className="absolute object-conver w-full blur-2xl "
+        />
+        <Image
+          src={book?.cover}
+          alt=""
+          height={100}
+          width={60}
+          className="w-[60%]  z-20 object-contain"
+        />
       </div>
 
       {/* Others */}
-      <div className="text-sm mx-4 my-2 gap-3">
-        <Link href="/books/1" className="font-bold text-black">
-          Stay With Me
-        </Link>
-        <p className="font-normal text-gray-400">Symon Alex</p>
-        <p className="font-light text-green-500">Free</p>
-        <div className="flex gap-1 text-yellow-500">
-          <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStarHalfAlt />
+      <div className="flex flex-col my-3 text-xs md:text-sm mx-2 md:mx-4">
+        <div>
+          <Link href="/books/1" className="text-sm font-bold text-black">
+            {book?.title}
+          </Link>
+          <p className="font-normal text-gray-400">{book?.genre?.title}</p>
+          <p className="font-light text-green-500">
+            Downloads ({book?.downloads})
+          </p>
+          <div className="flex gap-1 text-yellow-500 mt-1">
+            <FaStar />
+            <FaStar />
+            <FaStar />
+            <FaStar />
+            <FaStarHalfAlt />
+          </div>
         </div>
       </div>
     </div>
