@@ -62,9 +62,11 @@ export const getUserBooks = async (props: GetUserBooksProps) => {
   }
 };
 
-export const getBooks = async ({ searchUrl }: { searchUrl: string }) => {
+export const getBooks = async ({ searchUrl }: { searchUrl?: string }) => {
   try {
-    const response = await fetch(`${config.baseUrl}/api/v1/books/${searchUrl}`);
+    const response = await fetch(
+      `${config.baseUrl}/api/v1/books/${searchUrl || ""}`
+    );
 
     if (!response.ok) {
       throw new Error("Failed to fatch data.");
