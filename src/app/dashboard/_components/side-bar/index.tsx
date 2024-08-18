@@ -31,7 +31,7 @@ const SideBar = () => {
         {menuItems.map((item, index) => (
           <SidebarLinks key={index} title={item.title} path={item.path} />
         ))}
-        <button className="text-center rounded-md py-1 w-full bg-peace-400 text-white hover:border-[1px] hover:bg-white hover:text-peace-400 border-peace-400 ">
+        <button className="text-center rounded-md py-[0.3rem] w-full bg-peace-400 text-white hover:border-[1px] hover:bg-white hover:text-peace-400 border-peace-400 ">
           Logout
         </button>
       </div>

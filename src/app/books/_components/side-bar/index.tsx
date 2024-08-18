@@ -3,7 +3,7 @@ import { FaRegStar, FaStar } from "react-icons/fa6";
 
 const SideBar = () => {
   return (
-    <div className=" p-5 rounded-md border border-gray-300 mb-14">
+    <div className=" rounded-md border border-gray-300  min-h-[840px] p-5">
       {/* Popular Cateogry */}
       <div className="">
         <h1 className="text-center text-sm font-semibold my-2">

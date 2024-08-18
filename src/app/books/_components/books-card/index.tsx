@@ -34,9 +34,11 @@ const AllBooksCard = (props: Props) => {
 
       {/* Others */}
       <div className="flex flex-col text-sm mx-4 gap-1 py-2">
-        <Link href="/books/1" className="font-bold text-black">
-          {book?.title}
-        </Link>
+        <div className="truncate w-full">
+          <Link href={`/books/${book?._id}`} className="font-bold text-black">
+            {book?.title}
+          </Link>
+        </div>
         <p className="font-normal text-gray-400">{book?.author?.name}</p>
         <p className="font-light text-green-500 text-sm">
           Downloads ({book?.downloads})

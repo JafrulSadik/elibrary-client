@@ -19,7 +19,7 @@ export default async function Home() {
         <div className="h-2 w-8 mb-8 rounded bg-gradient-to-t from-crusta-700 to-crusta-400" />
 
         {/* Vertical line design */}
-        <div className="max-w-7xl w-[90%] flex flex-col items-center justify-center gap-10">
+        <div className="max-w-7xl w-[95%] flex flex-col items-center justify-center gap-10">
           {/* All Books */}
           <AllBooks />
 

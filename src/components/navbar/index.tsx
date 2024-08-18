@@ -1,7 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { auth, signOut } from "../../lib/auth";
 import LogoutBtn from "../logout-btn";
+import Logo from "./../../../public/images/logo3.png";
 import MobileMenu from "./MobileMenu";
+import ProfileBtn from "./ProfileBtn";
 import SearchForm from "./SearchForm";
 
 const Navbar = async () => {
@@ -13,14 +16,15 @@ const Navbar = async () => {
 
   return (
     <div className="flex justify-center w-full bg-crusta-950">
-      <div className="hidden max-w-7xl w-[90%]  md:flex container justify-between items-center h-24">
+      <div className="hidden max-w-7xl w-[90%]  lg:flex container justify-between items-center h-24">
         {/* Left Section */}
         <div className="flex-1">
           <Link
             href="/"
-            className=" text-crusta-500 text-[16px]  font-bold text-lg "
+            className="flex items-center gap-2 text-crusta-300 text-[16px]  font-bold text-lg  "
           >
-            e-library
+            <Image src={Logo} height={30} width={20} alt="logo.jpg" />
+            <span className="uppercase">e-library</span>
           </Link>
         </div>
 
@@ -33,12 +37,7 @@ const Navbar = async () => {
         <div className="flex justify-end flex-1  gap-2">
           {session?.user ? (
             <div className="flex gap-8 items-center">
-              <Link className="text-crusta-400" href="/dashboard">
-                Dashboard
-              </Link>
-              <Link className="text-crusta-400" href="/dashboard">
-                Profile
-              </Link>
+              <ProfileBtn user={session ? session?.user : ""} />
               <LogoutBtn />
             </div>
           ) : (
@@ -62,8 +61,8 @@ const Navbar = async () => {
         </div>
       </div>
 
-      <div className="h-16 w-full md:hidden">
-        <MobileMenu user={session ? session.user : ""} />
+      <div className="h-16 w-full lg:hidden">
+        <MobileMenu user={session ? session?.user : ""} />
       </div>
     </div>
   );

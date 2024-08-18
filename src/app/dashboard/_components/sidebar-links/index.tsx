@@ -15,7 +15,7 @@ const SidebarLinks = (props: Props) => {
   return (
     <Link
       href={path}
-      className={`text-sm text-center rounded-md py-1 w-full  text-crusta-950 hover:bg-gray-100 ${
+      className={`text-sm text-center rounded-md py-[0.3rem] w-full  text-crusta-950 hover:bg-gray-100 ${
         isActive && "bg-crusta-100"
       }`}
     >
