@@ -7,7 +7,7 @@ const menuItems = [
   },
   {
     title: "Favourite",
-    path: "/dashboard/favourite",
+    path: "/dashboard/favourite-books",
   },
   {
     title: "My Books",

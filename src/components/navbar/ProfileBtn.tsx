@@ -43,7 +43,7 @@ const ProfileBtn = (props: { user: any }) => {
           <span className="w-6">
             <GrFavorite />
           </span>
-          <Link href="/dasboard/favourite">Favourite</Link>
+          <Link href="/dashboard/favourite-books">Favourite</Link>
         </div>
         <div className="flex items-center gap-2 py-2 px-4">
           <span className="w-6">
