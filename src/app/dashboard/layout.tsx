@@ -6,8 +6,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex justify-center py-10 bg-[#f5f5f5]">
-      <div className="flex flex-col max-w-7xl w-[90%] mb-10">
+    <div className="flex justify-center py-5 md:py-10 bg-[#f5f5f5]">
+      <div className="flex flex-col max-w-7xl w-[95%] md:w-[90%] mb-10">
         <div className="flex gap-3">
           {/* Sidebar */}
           <div className=" w-full hidden lg:block flex-[0.2]">
