@@ -17,14 +17,14 @@ const Slider = () => {
             {/* Hero Title */}
             <div className="flex flex-col flex-1 gap-3 md:gap-5 justify-center">
               <h1 className="font-bold text-[12px] md:text-[15px] lg:text-[36px] text-soft-peach-950">
-                Share, Purchase, and Download Premium PDF books Instantly
+                Share, Explore, and Download Premium PDF books Instantly
               </h1>
               <p className="font-light hidden md:block text-soft-peach-600 text-[10px] md:text-[15px] lg:text-[20px]">
                 Unlock a World of Knowledge withOur Extensive Collection of
                 High-Quality PDF Books Across Various Categories.
               </p>
               <button className="text-[10px] text-light md:text-bold md:text-[16px] py-1 md:py-2  shadow-md bg-gradient-to-t from-crusta-500 to-crusta-400 hover:bg-crusta-600 font-light text-white rounded-md w-14 md:w-24">
-                Purchase
+                Browse all
               </button>
             </div>
 
