@@ -32,7 +32,7 @@ const ProfileBtn = (props: { user: any }) => {
         </span>
       </div>
 
-      <div className="absolute hidden group-hover:block text-base bg-white w-52 top-12 -right-1/2 rounded-md border border-gray-300 text-gray-900 py-2 z-30">
+      <div className="absolute hidden group-hover:block  text-base bg-white w-52 top-12 -right-1/2 rounded-md border border-gray-300 text-gray-900 py-2 z-30">
         <div className="flex items-center gap-2 py-2  px-4">
           <span className="w-6">
             <MdOutlinePerson size={22} />
