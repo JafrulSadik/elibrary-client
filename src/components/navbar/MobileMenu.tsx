@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
-import Logo from "../../../public/images/logo.png";
+import Logo from "../../../public/images/logo3.png";
 import ProfileImg from "../../../public/images/user/writer-1.png";
 
 const MobileMenu = ({ user }: any) => {
