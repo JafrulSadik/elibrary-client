@@ -10,10 +10,10 @@ const Category = (props: Props) => {
   const { handleSelect, genres, selectedGenre } = props;
 
   return (
-    <div className="grid w-[90%] max-w-7xl flex-wrap my-10 gap-10 lg:grid-cols-5 md:grid-cols-3 grid-cols-2">
+    <div className="grid w-[90%] max-w-7xl flex-wrap my-10 gap-5 md:gap-10 lg:grid-cols-5 md:grid-cols-3 grid-cols-2 cursor-pointer">
       {genres.map((genre, index) => (
         <div
-          className={`flex justify-center items-center rounded-lg w-full h-16  ${
+          className={`flex justify-center items-center rounded-lg w-full h-12 md:h-16  text-sm md:text-base  ${
             genre._id === selectedGenre._id
               ? "bg-gradient-to-t from-crusta-400 to-crusta-700"
               : "border-[2px] hover:border-crusta-900 hover:text-crusta-950 border-crusta-500 text-crusta-500 hover:bg-gradient-to-t from-crusta-400 to-crusta-700"

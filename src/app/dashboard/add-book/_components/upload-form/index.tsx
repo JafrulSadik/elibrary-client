@@ -1,12 +1,14 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { RiLoader2Line } from "react-icons/ri";
 import { z } from "zod";
-import { createBook } from "../../../../action";
+import { ApiResponseArryData } from "../../../../../types/ApiResponse";
+import { Genre } from "../../../../../types/Genre";
+import { createBook, getAllGenres } from "../../../../action";
 import "./style.css";
 
 const MAX_UPLOAD_SIZE = 1024 * 1024 * 1; // 1MB
@@ -67,6 +69,13 @@ type BookResponse = {
 const UploadBookForm = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [loadingData, setLoadingData] = useState(false);
+  const [genres, setGenre] = useState<Genre[]>([]);
+  const [selectedGenre, setSelectedGenre] = useState<Genre>({
+    _id: "",
+    title: "",
+    code: 0,
+  });
 
   const notify = () =>
     toast.success("Book creation successfull.", {
@@ -96,7 +105,7 @@ const UploadBookForm = () => {
       const formData = new FormData();
 
       formData.append("title", title);
-      formData.append("genre", genre);
+      formData.append("genreId", genre);
       formData.append("description", description);
       formData.append("coverImage", coverImage[0]);
       formData.append("pdfFile", pdfFile[0]);
@@ -119,6 +128,17 @@ const UploadBookForm = () => {
       });
     }
   };
+
+  const fetchGenre = async () => {
+    setLoadingData(true);
+    const response = (await getAllGenres()) as ApiResponseArryData<Genre>;
+    setGenre(response.data);
+    setLoadingData(false);
+  };
+
+  useEffect(() => {
+    fetchGenre();
+  }, []);
 
   return (
     <form
@@ -145,12 +165,27 @@ const UploadBookForm = () => {
 
       <div className=" flex flex-col gap-1 text-sm">
         <label>Genre</label>
-        <input
+        {/* <input
           type="text"
           className="p-2 rounded-sm border-[0.5px] outline-none border-gray-200 font-base"
           placeholder="Enter book genre"
           {...register("genre")}
-        />
+        /> */}
+        <select
+          className="border-[0.5px] border-gray-200 rounded-sm outline-none p-2"
+          // onChange={(event) => handleSelectGenre({ id: event.target.value })}
+          defaultValue=""
+          {...register("genre")}
+        >
+          <option value="" selected={true} disabled={true}>
+            Select genre
+          </option>
+          {genres.map((genre) => (
+            <option key={genre._id} value={genre._id} className="p-5">
+              {genre.title}
+            </option>
+          ))}
+        </select>
       </div>
 
       {errors.genre && (
@@ -161,9 +196,8 @@ const UploadBookForm = () => {
 
       <div className=" flex flex-col gap-1 text-sm">
         <label>Description</label>
-        <input
-          type="text"
-          className="p-2 rounded-sm border-[0.5px] outline-none border-gray-200 font-base"
+        <textarea
+          className="p-2 rounded-md border-[0.5px] outline-none border-gray-200 font-base"
           placeholder="Enter book Description"
           {...register("description")}
         />

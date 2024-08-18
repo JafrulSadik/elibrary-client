@@ -11,7 +11,7 @@ const Card = (props: Props) => {
   const { book } = props;
 
   return (
-    <div className="flex flex-col bg-white rounded-md w-full max-w-36  md:max-w-40 md:h-64 shadow-md">
+    <div className="flex flex-col  bg-white rounded-md w-full max-w-36  md:max-w-40 md:h-64 shadow-md">
       {/* Image div */}
       <div className="overflow-hidden relative flex justify-center rounded-t-md">
         <Image
@@ -31,11 +31,16 @@ const Card = (props: Props) => {
       </div>
 
       {/* Others */}
-      <div className="flex flex-col my-3 text-xs md:text-sm mx-2 md:mx-4">
-        <div>
-          <Link href="/books/1" className="text-sm font-bold text-black">
-            {book?.title}
-          </Link>
+      <div className="flex flex-col my-3 text-xs md:text-sm px-2 md:px-4">
+        <div className="w-full">
+          <div className="truncate">
+            <Link
+              href={`/books/${book?._id}`}
+              className="text-sm font-bold text-black"
+            >
+              {book?.title}
+            </Link>
+          </div>
           <p className="font-normal text-gray-400">{book?.genre?.title}</p>
           <p className="font-light text-green-500">
             Downloads ({book?.downloads})

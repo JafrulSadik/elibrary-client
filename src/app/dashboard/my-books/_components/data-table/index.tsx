@@ -7,8 +7,6 @@ import {
 } from "@tanstack/react-table";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { ImSpinner2 } from "react-icons/im";
-import Swal from "sweetalert2";
 import Pagination from "../../../../../components/pagination";
 import { ApiSuccessfullResponse } from "../../../../../types/ApiResponse";
 import {
@@ -16,7 +14,8 @@ import {
   GetUserBooksProps,
   PaginationType,
 } from "../../../../../types/Book";
-import { deleteBook, getUserBooks } from "../../../../action";
+import { getUserBooks } from "../../../../action";
+import DeleteBtn from "../delete-btn";
 
 type ColumnType = Pick<
   Book,
@@ -29,7 +28,6 @@ const DataTable = () => {
   const [page, setPage] = useState<number>(1);
   const [data, setData] = useState<Book[]>([]);
   const [loading, setLoading] = useState(false);
-  const [deleteLoading, setDeleteLoading] = useState(false);
   const [totalPage, setTotalPage] = useState(0);
 
   const fetchData = async (props: GetUserBooksProps) => {
@@ -50,32 +48,6 @@ const DataTable = () => {
     setPage(selected + 1);
   };
 
-  const handleDelete = async ({ bookId }: { bookId: string }) => {
-    const result = await Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#441006",
-      cancelButtonColor: "#a84a1f",
-      confirmButtonText: "Yes, delete it!",
-    });
-
-    setDeleteLoading(true);
-
-    if (result.isConfirmed) {
-      await deleteBook({ bookId });
-      Swal.fire({
-        title: "Deleted!",
-        text: "Your file has been deleted.",
-        confirmButtonColor: "#441006",
-        icon: "success",
-      });
-    }
-    setDeleteLoading(false);
-    await fetchData({ page });
-  };
-
   useEffect(() => {
     fetchData({ page });
   }, [page]);
@@ -84,7 +56,7 @@ const DataTable = () => {
     columnHelper.accessor("cover", {
       header: () => "Cover Image",
       cell: (info) => (
-        <div className="flex justify-center">
+        <div className="flex justify-center p-1">
           <Image
             src={info.getValue()}
             alt="Book Image"
@@ -136,18 +108,7 @@ const DataTable = () => {
             <button className="px-3 py-1 bg-slate-100 border border-gray-200 shadow-sm rounded-md hover:border-gray-300">
               Update
             </button>
-            <button
-              className="flex items-center gap-1 px-3 py-1 bg-crusta-950 hover:bg-crusta-800 text-white rounded-md "
-              onClick={() => handleDelete({ bookId: info.getValue() })}
-              disabled={deleteLoading}
-            >
-              {deleteLoading && (
-                <span className="animate-spin">
-                  <ImSpinner2 size={16} />
-                </span>
-              )}
-              <span>Delete</span>
-            </button>
+            <DeleteBtn bookId={info.getValue()} fetchData={fetchData} />
           </div>
         );
       },
@@ -163,11 +124,11 @@ const DataTable = () => {
   return (
     <div className="w-full  my-1">
       <div className="w-full overflow-x-scroll scroll">
-        <div className="min-w-[500px] border border-gray-300 rounded-md">
+        <div className="min-w-[500px] border border-gray-200 rounded-md">
           <table className="w-full">
-            <thead className="border-b-[1px] border-gray-300">
+            <thead className="border-b-[0.5px] border-gray-200 ">
               {table.getHeaderGroups().map((headerGroup, index) => (
-                <tr className="h-12" key={index}>
+                <tr className="h-14" key={index}>
                   {headerGroup.headers.map((header, index) => (
                     <th
                       className=" text-center font-semibold text-sm p-2"
@@ -184,7 +145,10 @@ const DataTable = () => {
             </thead>
             <tbody>
               {table.getRowModel().rows.map((raw, index) => (
-                <tr className="border-b-[1px] border-gray-300 h-14" key={index}>
+                <tr
+                  className="border-b-[0.5px] border-gray-200 h-14"
+                  key={index}
+                >
                   {raw.getVisibleCells().map((cell, index) => (
                     <td className="text-sm" key={index}>
                       {flexRender(
