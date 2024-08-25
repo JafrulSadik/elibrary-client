@@ -1,4 +1,5 @@
 "use server";
+
 import { config } from "../../config/config";
 import {
   ApiResponseArryData,
@@ -11,9 +12,16 @@ type Props = {
   genre: Genre;
 };
 
-export const getAllGenres = async () => {
+type GetAllGenreProps = {
+  queryString: string;
+};
+
+export const getAllGenre = async (props: GetAllGenreProps) => {
+  const { queryString } = props;
   try {
-    const response = await fetch(`${config.baseUrl}/api/v1/genres`);
+    const response = await fetch(
+      `${config.baseUrl}/api/v1/genres?${queryString}&limit={5}`
+    );
 
     if (!response.ok) {
       throw new Error("Failed to fatch data.");
@@ -43,7 +51,6 @@ export const getBookByGenreId = async (props: Props) => {
 
     return data;
   } catch (error) {
-    console.log({ error });
     throw new Error("Failed to fatch data.");
   }
 };
