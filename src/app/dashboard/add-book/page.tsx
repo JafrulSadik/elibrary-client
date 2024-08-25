@@ -1,9 +1,6 @@
-import { auth } from "../../../lib/auth";
 import UploadBookForm from "./_components/upload-form";
 
 const UploadBook = async () => {
-  const session = await auth();
-
   return (
     <div className="flex flex-col items-center rounded-md border bg-white border-gray-300">
       <div className="flex flex-col w-[80%] my-12 lg:my-16">
