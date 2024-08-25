@@ -45,8 +45,7 @@ export const userRegistration = async (props: RegistrationFormType) => {
 
     return await response.json();
   } catch (error: any) {
-    console.log(await error.json());
-    throw error;
+    throw new error();
   }
 };
 
