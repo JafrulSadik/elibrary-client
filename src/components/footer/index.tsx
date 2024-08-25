@@ -10,7 +10,13 @@ const Footer = () => {
         {/* Left */}
         <div className="flex flex-1 flex-col gap-4">
           <div className="flex items-center h-14 gap-3">
-            <Image src={Logo} alt="" height={25} width={25} />
+            <Image
+              src={Logo}
+              alt=""
+              height="0"
+              width="0"
+              className="w-12 h-12"
+            />
             <h1 className=" font-semibold tracking-tight uppercase text-white">
               e-library
             </h1>

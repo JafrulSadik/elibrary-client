@@ -23,7 +23,13 @@ const Navbar = async () => {
             href="/"
             className="flex items-center gap-2 text-crusta-300 text-[16px]  font-bold text-lg  "
           >
-            <Image src={Logo} height={30} width={20} alt="logo.jpg" />
+            <Image
+              src={Logo}
+              height="0"
+              width="0"
+              className="h-8 w-7"
+              alt="logo.jpg"
+            />
             <span className="uppercase">e-library</span>
           </Link>
         </div>

@@ -18,10 +18,10 @@ const ProfileBtn = (props: { user: any }) => {
       // onClick={() => setDropDown((prev) => !prev)}
     >
       <Image
-        className="rounded-full border-2 border-crusta-300"
+        className="rounded-full border-2 border-crusta-300 w-9 h-9"
         src={Profile}
-        height={30}
-        width={30}
+        height="0"
+        width="0"
         alt="Profile"
       />
       <div className="flex">

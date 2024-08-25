@@ -36,10 +36,16 @@ const MobileMenu = ({ user }: any) => {
         </div>
 
         {/* logo */}
-        <div className="flex items-center gap-2">
-          <Image src={Logo} alt="logo.png" height={15} width={15} />
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src={Logo}
+            alt="logo.png"
+            height="0"
+            width="0"
+            className="h-6 w-5"
+          />
           <span className=" text-crusta-500 font-light">E-LIBRERY</span>
-        </div>
+        </Link>
 
         {/* login */}
         <div>
@@ -50,9 +56,9 @@ const MobileMenu = ({ user }: any) => {
             </Link> */}
               <Image
                 src={ProfileImg}
-                className="rounded-full"
-                height={30}
-                width={30}
+                className="rounded-full border border-crusta-350 h-7 w-7"
+                height="0"
+                width="0"
                 alt="profile.jpg"
               />
             </div>
@@ -89,8 +95,9 @@ const MobileMenu = ({ user }: any) => {
               <div className="flex gap-4 items-center">
                 <Image
                   src={ProfileImg}
-                  height={30}
-                  width={30}
+                  className="h-7 w-7"
+                  height="0"
+                  width="0"
                   alt="profile.jpg"
                 />
 
@@ -110,7 +117,7 @@ const MobileMenu = ({ user }: any) => {
               </Link>
             </div>
             <div className=" text-crusta-950 font-medium py-3 px-8 ">
-              <Link href="" className="">
+              <Link href="/dashboard/favourite-books" className="">
                 Favourite
               </Link>
             </div>
