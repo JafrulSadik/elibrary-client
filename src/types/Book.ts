@@ -1,17 +1,15 @@
+import { Genre } from "./Genre";
+import { User } from "./User";
+
+type UserType = Pick<User, "_id" | "name">;
+
 export type Book = {
   _id: string;
   title: string;
-  genre: {
-    _id: string;
-    title: string;
-    code: string;
-  };
+  genre: Genre;
   cover: string;
   description: string;
-  author: {
-    _id: string;
-    name: string;
-  };
+  author: UserType;
   status: "pending" | "approved" | "blocked" | "decline";
   downloads: number;
   file: string;
@@ -45,7 +43,7 @@ export type GetBooksProps = {
 
 export type Reviews = {
   bookId: string;
-  authorId: string;
+  authorId: User;
   rating?: number;
   comment?: string;
   _id: string;
