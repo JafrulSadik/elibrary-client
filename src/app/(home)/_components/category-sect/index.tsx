@@ -41,7 +41,9 @@ const CategorySect = () => {
 
   const fetchGenre = async () => {
     setLoading(true);
-    const response = (await getAllGenre({})) as ApiResponseArryData<Genre>;
+    const response = (await getAllGenre({
+      queryString: "",
+    })) as ApiResponseArryData<Genre>;
     setData(response.data);
     setGenre(response?.data[0]);
     setLoading(false);
