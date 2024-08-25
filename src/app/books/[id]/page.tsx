@@ -3,24 +3,22 @@ import { FaStarHalfAlt } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
 import DownloadBtn from "../../../components/buttons/download-btn";
 import PreviewBtn from "../../../components/buttons/preview-btn";
-import { config } from "../../../config/config";
-import { ApiResponseSingleData } from "../../../types/ApiResponse";
-import { Book } from "../../../types/Book";
+import { auth } from "../../../lib/auth";
+import { getBooksById, isAddedToFavourite } from "../../action/book-action";
+import AddToFavourite from "./components/add-to-favourite";
 import BookSpec from "./components/book-spec";
 import Reviews from "./components/review-rating/Reviews";
 
 const page = async ({ params }: { params: { id: string } }) => {
+  const session = await auth();
   const { id } = params;
+  let isFavourite;
 
-  const response = await fetch(`${config.baseUrl}/api/v1/books/${id}`, {
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    throw new Error("Something went wrong...");
+  if (session) {
+    isFavourite = await isAddedToFavourite({ bookId: id });
   }
 
-  const data = (await response.json()) as ApiResponseSingleData<Book>;
+  const data = await getBooksById({ id });
 
   return (
     <div className="flex flex-col items-center bg-[#f5f5f5]">
@@ -72,6 +70,7 @@ const page = async ({ params }: { params: { id: string } }) => {
               </p>
             </div>
 
+            <AddToFavourite isFavourite={isFavourite?.data} bookId={id} />
             <PreviewBtn />
             <DownloadBtn />
           </div>
@@ -82,7 +81,7 @@ const page = async ({ params }: { params: { id: string } }) => {
       <BookSpec />
 
       {/* Reviews and others sect */}
-      <Reviews />
+      <Reviews bookId={id} totalReviews={data.data.numOfRating} />
     </div>
   );
 };
