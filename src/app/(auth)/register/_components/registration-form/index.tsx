@@ -8,7 +8,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { RiLoader2Line } from "react-icons/ri";
 import { z } from "zod";
-import { userRegistration } from "../../../../action";
+import { userRegistration } from "../../../../action/auth-action";
 
 const RegistraionFormSchema = z
   .object({

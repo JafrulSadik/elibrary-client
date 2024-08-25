@@ -8,7 +8,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { RiLoader2Line } from "react-icons/ri";
 import { z } from "zod";
-import { loginWithCredintial } from "../../../../action";
+import { loginWithCredintial } from "../../../../action/auth-action";
 
 const LoginSchema = z.object({
   email: z.string().min(1, "* Email is requried").email(),
@@ -113,7 +113,7 @@ const LoginForm = () => {
         <span>Sign In</span>
       </button>
       <p className="text-sm text-center my-4">
-        Don't have an account ? <Link href="/register">Register</Link>
+        {"Don't have an account"} ? <Link href="/register">Register</Link>
       </p>
     </form>
   );

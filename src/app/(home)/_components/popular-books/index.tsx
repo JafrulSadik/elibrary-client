@@ -6,7 +6,7 @@ import StarIcon from "../../../../../public/icons/star/StarIcon";
 import Card from "../../../../components/card";
 import { ApiSuccessfullResponse } from "../../../../types/ApiResponse";
 import { Book, PaginationType } from "../../../../types/Book";
-import { getBooks } from "../../../action";
+import { getBooks } from "../../../action/book-action";
 
 const PopularBooks = () => {
   const [loading, setLoading] = useState(false);

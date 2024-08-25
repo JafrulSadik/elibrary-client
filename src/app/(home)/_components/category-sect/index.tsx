@@ -11,7 +11,7 @@ import {
 } from "../../../../types/ApiResponse";
 import { Book, PaginationType } from "../../../../types/Book";
 import { Genre } from "../../../../types/Genre";
-import { getAllGenres, getBookByGenreId } from "../../../action/genre-action";
+import { getAllGenre, getBookByGenreId } from "../../../action/genre-action";
 import Category from "../category";
 
 type Props = {
@@ -41,7 +41,7 @@ const CategorySect = () => {
 
   const fetchGenre = async () => {
     setLoading(true);
-    const response = (await getAllGenres()) as ApiResponseArryData<Genre>;
+    const response = (await getAllGenre({})) as ApiResponseArryData<Genre>;
     setData(response.data);
     setGenre(response?.data[0]);
     setLoading(false);

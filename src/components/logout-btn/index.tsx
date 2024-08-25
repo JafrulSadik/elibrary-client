@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { logout } from "../../app/action";
+import { logout } from "../../app/action/auth-action";
 
 const LogoutBtn = () => {
   const router = useRouter();

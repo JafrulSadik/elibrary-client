@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Card from "../../../../components/card";
 import { ApiSuccessfullResponse } from "../../../../types/ApiResponse";
 import { Book, PaginationType } from "../../../../types/Book";
-import { getBooks } from "../../../action";
+import { getBooks } from "../../../action/book-action";
 
 const AllBooks = () => {
   const [loading, setLoading] = useState(false);

@@ -5,11 +5,10 @@ import { useEffect, useState } from "react";
 import Pagination from "../../../../components/pagination";
 import { ApiSuccessfullResponse } from "../../../../types/ApiResponse";
 import { Book, PaginationType } from "../../../../types/Book";
-import { getBooks } from "../../../action";
+import { getBooks } from "../../../action/book-action";
 import AllBooks from "../all-books";
 import FilterSect from "../filter";
 import SideBar from "../side-bar";
-let count = 0;
 
 const SearchBooks = () => {
   const router = useRouter();
@@ -64,7 +63,7 @@ const SearchBooks = () => {
   useEffect(() => {
     const searchQuery = window.location.search;
     fetchData(searchQuery);
-  }, [searchParams]);
+  }, [searchParams, router]);
 
   return (
     <div className="flex flex-col max-w-7xl w-[90%] mb-10">

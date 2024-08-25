@@ -14,7 +14,7 @@ import {
   GetUserBooksProps,
   PaginationType,
 } from "../../../../../types/Book";
-import { getUserBooks } from "../../../../action";
+import { getUserBooks } from "../../../../action/book-action";
 import DeleteBtn from "../delete-btn";
 
 type ColumnType = Pick<

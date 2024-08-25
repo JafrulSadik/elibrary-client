@@ -8,7 +8,8 @@ import { RiLoader2Line } from "react-icons/ri";
 import { z } from "zod";
 import { ApiResponseArryData } from "../../../../../types/ApiResponse";
 import { Genre } from "../../../../../types/Genre";
-import { createBook, getAllGenres } from "../../../../action";
+import { createBook } from "../../../../action/book-action";
+import { getAllGenre } from "../../../../action/genre-action";
 import "./style.css";
 
 const MAX_UPLOAD_SIZE = 1024 * 1024 * 1; // 1MB
@@ -71,11 +72,6 @@ const UploadBookForm = () => {
   const [loading, setLoading] = useState(false);
   const [loadingData, setLoadingData] = useState(false);
   const [genres, setGenre] = useState<Genre[]>([]);
-  const [selectedGenre, setSelectedGenre] = useState<Genre>({
-    _id: "",
-    title: "",
-    code: 0,
-  });
 
   const notify = () =>
     toast.success("Book creation successfull.", {
@@ -131,7 +127,9 @@ const UploadBookForm = () => {
 
   const fetchGenre = async () => {
     setLoadingData(true);
-    const response = (await getAllGenres()) as ApiResponseArryData<Genre>;
+    const response = (await getAllGenre({
+      queryString: "",
+    })) as ApiResponseArryData<Genre>;
     setGenre(response.data);
     setLoadingData(false);
   };
@@ -165,12 +163,6 @@ const UploadBookForm = () => {
 
       <div className=" flex flex-col gap-1 text-sm">
         <label>Genre</label>
-        {/* <input
-          type="text"
-          className="p-2 rounded-sm border-[0.5px] outline-none border-gray-200 font-base"
-          placeholder="Enter book genre"
-          {...register("genre")}
-        /> */}
         <select
           className="border-[0.5px] border-gray-200 rounded-sm outline-none p-2"
           // onChange={(event) => handleSelectGenre({ id: event.target.value })}
@@ -241,7 +233,7 @@ const UploadBookForm = () => {
       <div className="flex gap-2 mt-3">
         <button
           disabled={loading}
-          className={`flex items-center justify-center gap-2 px-8 py-2 text-white  rounded-md ${
+          className={`flex items-center justify-center gap-2 px-8 py-2 text-white  rounded-md shadow-md ${
             loading ? "bg-gray-400" : "bg-black"
           }`}
         >

@@ -6,15 +6,18 @@ import { ImCross, ImSpinner2 } from "react-icons/im";
 import { notify } from "../../../../../lib/notify";
 import { AddReviewResponse } from "../../../../../types/ApiResponse";
 import { Reviews } from "../../../../../types/Book";
-import { addReview } from "../../../../action";
+import { addReview } from "../../../../action/book-action";
 import AddReviewButton from "../add-review-btn";
 
 type Props = {
   isLoggedIn: boolean;
+  userId?: string;
+  bookId: string;
 };
 
 const AddReview = (props: Props) => {
-  const { isLoggedIn } = props;
+  const { isLoggedIn, bookId } = props;
+
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
   const [error, setError] = useState(false);
@@ -35,7 +38,7 @@ const AddReview = (props: Props) => {
       const response = (await addReview({
         review,
         rating,
-        bookId: "66bbd430411f475a5c07acf8",
+        bookId: bookId || "",
       })) as AddReviewResponse<Reviews>;
 
       if (response.code === 201) {
