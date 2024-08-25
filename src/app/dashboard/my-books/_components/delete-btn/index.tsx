@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ImSpinner2 } from "react-icons/im";
 import Swal from "sweetalert2";
-import { deleteBook } from "../../../../action";
+import { deleteBook } from "../../../../action/book-action";
 
 type Props = {
   bookId: string;
