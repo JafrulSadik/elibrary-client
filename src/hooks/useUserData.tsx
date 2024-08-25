@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Book } from "../types/Book";
+import { User } from "../types/User";
 
 interface UseUserDataProps {
   page: number;
@@ -13,7 +13,7 @@ interface UseUserDataReturn {
 }
 
 const useUserData = ({ page }: UseUserDataProps): UseUserDataReturn => {
-  const [data, setData] = useState<Book[]>([]);
+  const [data, setData] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
   const [totalRecords, setTotalRecords] = useState(0);
   const [error, setError] = useState<string | null>(null);
