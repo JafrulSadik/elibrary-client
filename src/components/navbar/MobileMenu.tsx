@@ -56,7 +56,7 @@ const MobileMenu = ({ user }: any) => {
             </Link> */}
               <Image
                 src={ProfileImg}
-                className="rounded-full border border-crusta-350 h-7 w-7"
+                className="rounded-full border border-crusta-350 h-8 w-8"
                 height="0"
                 width="0"
                 alt="profile.jpg"
@@ -95,7 +95,7 @@ const MobileMenu = ({ user }: any) => {
               <div className="flex gap-4 items-center">
                 <Image
                   src={ProfileImg}
-                  className="h-7 w-7"
+                  className="h-8 w-8"
                   height="0"
                   width="0"
                   alt="profile.jpg"
