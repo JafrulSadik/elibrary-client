@@ -13,7 +13,7 @@ const useBookReviews = (props: Props) => {
 
   const [reviews, setReviews] = useState<Reviews[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -22,23 +22,25 @@ const useBookReviews = (props: Props) => {
 
   const fetchReviews = async (page: number) => {
     setLoading(true); // Start loading
+
     try {
       const response = await getReviews({
         bookId,
-        limit: 2,
-        page: currentPage,
+        limit: 1 * page,
       });
 
       const { data } = response;
 
-      // console.log({ data });
-
       if (response.data.length > 0) {
-        setReviews((prevReviews) => [...prevReviews, ...data]);
+        setReviews(() => [...data]);
+        setCurrentPage((prev) => prev + 1);
       }
 
-      if (data.length <= totalReviews) {
+      if (data.length >= totalReviews) {
         setHasMore(false); // No more reviews to fetch
+      } else {
+        setCurrentPage((prev) => prev + 1);
+        setHasMore(true);
       }
     } catch (error) {
       console.error("Error fetching reviews:", error);

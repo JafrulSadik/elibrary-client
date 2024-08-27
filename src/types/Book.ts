@@ -50,3 +50,8 @@ export type Reviews = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type RatingCount = {
+  _id: number;
+  count: number;
+};

@@ -12,6 +12,7 @@ import {
   Book,
   GetUserBooksProps,
   PaginationType,
+  RatingCount,
   Reviews,
 } from "../../types/Book";
 import { ApiResponseSingleData } from "./../../types/ApiResponse";
@@ -39,7 +40,6 @@ type AddToFavouriteResponse = {
 
 type GetReviewProps = {
   bookId: string;
-  page: number;
   limit: number;
 };
 
@@ -162,10 +162,10 @@ export const addReview = async (props: ReviewProps) => {
 };
 
 export const getReviews = async (props: GetReviewProps) => {
-  const { bookId, page, limit } = props;
+  const { bookId, limit } = props;
   try {
     const response = await fetch(
-      `${config.baseUrl}/api/v1/books/${bookId}/reviews?page=${page}&limit=${limit}`
+      `${config.baseUrl}/api/v1/books/${bookId}/reviews?limit=${limit}`
     );
     const data = (await response.json()) as ApiResponseArryData<Reviews>;
     return data;
@@ -239,6 +239,25 @@ export const addToFavourite = async (props: { bookId: string }) => {
   const data = (await response.json()) as AddToFavouriteResponse;
 
   return data;
+};
+
+export const countReviews = async (props: { bookId: string }) => {
+  const { bookId } = props;
+  try {
+    const response = await fetch(
+      `${config.baseUrl}/api/v1/books/${bookId}/review-count`
+    );
+
+    if (!response.ok) {
+      throw new Error("Fetch data failed!");
+    }
+
+    const data = (await response.json()) as ApiResponseArryData<RatingCount>;
+
+    return data;
+  } catch (error) {
+    throw new Error("Fetch data failed!");
+  }
 };
 
 export const isAddedToFavourite = async (props: { bookId: string }) => {

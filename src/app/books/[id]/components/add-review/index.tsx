@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaStar } from "react-icons/fa6";
 import { ImCross, ImSpinner2 } from "react-icons/im";
@@ -25,6 +26,8 @@ const AddReview = (props: Props) => {
   const [loading, setLoading] = useState(false);
   const [reviewModal, setReviewModal] = useState(false);
 
+  const router = useRouter();
+
   const handleReviewModal = () => {
     setReviewModal((prev) => !prev);
   };
@@ -45,6 +48,7 @@ const AddReview = (props: Props) => {
         notify({ message: "Review added successfully" });
         setLoading(false);
         setReviewModal(false);
+        router.refresh();
       } else {
         setLoading(false);
         setError(true);

@@ -20,7 +20,7 @@ const Reviews = async (props: Props) => {
       <div className="w-[90%] flex flex-col">
         <h1 className="text-2xl text-center mb-4">Rating and Reviews</h1>
         {/* Total Rating and reviews*/}
-        <ReviewsCount />
+        <ReviewsCount id={bookId} />
 
         {/* Write a review */}
         <div className="flex w-full justify-center my-6">

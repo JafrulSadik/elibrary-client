@@ -1,12 +1,11 @@
 import Image from "next/image";
-import { FaStarHalfAlt } from "react-icons/fa";
-import { FaStar } from "react-icons/fa6";
 import DownloadBtn from "../../../components/buttons/download-btn";
 import PreviewBtn from "../../../components/buttons/preview-btn";
 import { auth } from "../../../lib/auth";
 import { getBooksById, isAddedToFavourite } from "../../action/book-action";
 import AddToFavourite from "./components/add-to-favourite";
 import BookSpec from "./components/book-spec";
+import Ratings from "./components/ratings";
 import Reviews from "./components/review-rating/Reviews";
 
 const page = async ({ params }: { params: { id: string } }) => {
@@ -20,6 +19,10 @@ const page = async ({ params }: { params: { id: string } }) => {
 
   const data = await getBooksById({ id });
 
+  const { numOfRating, totalRating, cover, title, genre, author } = data.data;
+
+  const rating = totalRating / numOfRating;
+
   return (
     <div className="flex flex-col items-center bg-[#f5f5f5]">
       <div className="flex flex-col my-12 max-w-7xl w-[90%] shadow-sm rounded-md py-16 border border-gray-200">
@@ -29,14 +32,14 @@ const page = async ({ params }: { params: { id: string } }) => {
           <div className="flex flex-1 justify-center">
             <div className="overflow-hidden h-64 w-64  md:h-72 md:w-72 lg:h-96 lg:w-96 relative flex justify-center rounded-md border">
               <Image
-                src={data?.data?.cover}
+                src={cover}
                 alt=""
                 width="0"
                 height="0"
                 className="object-conver blur-2xl w-full h-full"
               />
               <Image
-                src={data.data.cover}
+                src={cover}
                 alt=""
                 width="100"
                 height="100"
@@ -49,24 +52,21 @@ const page = async ({ params }: { params: { id: string } }) => {
           {/* Title Sect */}
           <div className="flex justify-center items-center md:items-start flex-col flex-1 w-64 gap-2 md:gap-3 lg:gap-">
             <h1 className="font-extrabold text-2xl md:text-3xl lg:text-4xl text-crusta-950">
-              {data.data.title}
+              {title}
             </h1>
             <p className=" text-base md:text-xl lg:text-2xl text-black font-normal">
-              Writer : {data.data.author.name}
+              Writer : {author.name}
             </p>
             <p className="text-sm md:text-base lg:text-xl font-light text-black">
-              Genre : {data.data.genre.title}
+              Genre : {genre.title}
             </p>
             <div className="flex items-center gap-3 mb-3">
               <div className="flex text-yellow-500 text-base md:text-xl lg:text-2xl">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStarHalfAlt />
+                <Ratings rating={rating} />
               </div>
               <p className="text-xs md:text-sm lg:text-xl">
-                {data.data.totalRating} | {data.data.numOfRating} reviews
+                {rating ? rating.toPrecision(2) : 0} | {data.data.numOfRating}{" "}
+                reviews
               </p>
             </div>
 
