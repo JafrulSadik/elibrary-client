@@ -47,11 +47,11 @@ const ReviewsCount = async (props: Props) => {
 
           <div className="w-28 bg-gray-300 h-2 rounded">
             <div
-              className={`bg-yellow-600 w-[${allRatings[5].percentage}%] h-2 rounded`}
+              className={`bg-yellow-600 w-[${allRatings[5]?.percentage}%] h-2 rounded`}
             />
           </div>
 
-          <p className="text-xs w-8 ">{allRatings[5].count}</p>
+          <p className="text-xs w-8 ">{allRatings[5]?.count}</p>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex text-sm text-yellow-600 ">
@@ -64,11 +64,11 @@ const ReviewsCount = async (props: Props) => {
 
           <div className="w-28 bg-gray-300 h-2 rounded">
             <div
-              className={`bg-yellow-600 w-[${allRatings[4].percentage}%] h-2 rounded`}
+              className={`bg-yellow-600 w-[${allRatings[4]?.percentage}%] h-2 rounded`}
             />
           </div>
 
-          <p className="text-xs w-8">{allRatings[4].count}</p>
+          <p className="text-xs w-8">{allRatings[4]?.count}</p>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex text-sm text-yellow-600 ">
@@ -81,11 +81,11 @@ const ReviewsCount = async (props: Props) => {
 
           <div className="w-28 bg-gray-300 h-2 rounded">
             <div
-              className={`bg-yellow-600 w-[${allRatings[3].percentage}%] h-2 rounded`}
+              className={`bg-yellow-600 w-[${allRatings[3]?.percentage}%] h-2 rounded`}
             />
           </div>
 
-          <p className="text-xs w-8">{allRatings[3].count}</p>
+          <p className="text-xs w-8">{allRatings[3]?.count}</p>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex text-sm text-yellow-600 ">
@@ -98,11 +98,11 @@ const ReviewsCount = async (props: Props) => {
 
           <div className="w-28 bg-gray-300 h-2 rounded">
             <div
-              className={`bg-yellow-600 w-[${allRatings[2].percentage}%] h-2 rounded`}
+              className={`bg-yellow-600 w-[${allRatings[2]?.percentage}%] h-2 rounded`}
             />
           </div>
 
-          <p className="text-xs w-8">{allRatings[2].count}</p>
+          <p className="text-xs w-8">{allRatings[2]?.count}</p>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex text-sm text-yellow-600 ">
@@ -115,11 +115,11 @@ const ReviewsCount = async (props: Props) => {
 
           <div className="w-28 bg-gray-300 h-2 rounded overflow-hidden">
             <div
-              className={`bg-yellow-600 w-[${allRatings[1].percentage}%] h-2 rounded`}
+              className={`bg-yellow-600 w-[${allRatings[1]?.percentage}%] h-2 rounded`}
             />
           </div>
 
-          <p className="text-xs w-8">{allRatings[1].count}</p>
+          <p className="text-xs w-8">{allRatings[1]?.count}</p>
         </div>
       </div>
     </div>

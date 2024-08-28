@@ -1,23 +1,25 @@
+import { Book } from "../../../../../types/Book";
 import Author from "../author";
 import Specification from "../specification";
 import Summery from "../summery";
 
 type Props = {
   option: string;
+  book: Book;
 };
 
 const Details = (props: Props) => {
-  const { option } = props;
+  const { option, book } = props;
 
   switch (option) {
     case "summery":
-      return <Summery />;
+      return <Summery book={book} />;
     case "spec":
-      return <Specification />;
+      return <Specification book={book} />;
     case "author":
-      return <Author />;
+      return <Author book={book} />;
     default:
-      return <Summery />;
+      return <Summery book={book} />;
   }
 };
 

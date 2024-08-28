@@ -1,9 +1,15 @@
 "use client";
 import { useState } from "react";
+import { Book } from "../../../../../types/Book";
 import Details from "../deatils";
 
-const DescriptionSect = () => {
+type Props = {
+  book: Book;
+};
+
+const DescriptionSect = (props: Props) => {
   const [option, setOption] = useState("summery");
+  const { book } = props;
 
   return (
     <>
@@ -40,7 +46,7 @@ const DescriptionSect = () => {
       </div>
 
       {/* Description */}
-      <Details option={option} />
+      <Details option={option} book={book} />
     </>
   );
 };

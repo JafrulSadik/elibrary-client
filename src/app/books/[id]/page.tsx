@@ -17,9 +17,10 @@ const page = async ({ params }: { params: { id: string } }) => {
     isFavourite = await isAddedToFavourite({ bookId: id });
   }
 
-  const data = await getBooksById({ id });
+  const response = await getBooksById({ id });
 
-  const { numOfRating, totalRating, cover, title, genre, author } = data.data;
+  const { numOfRating, totalRating, cover, title, genre, author } =
+    response.data;
 
   const rating = totalRating / numOfRating;
 
@@ -65,8 +66,7 @@ const page = async ({ params }: { params: { id: string } }) => {
                 <Ratings rating={rating} />
               </div>
               <p className="text-xs md:text-sm lg:text-xl">
-                {rating ? rating.toPrecision(2) : 0} | {data.data.numOfRating}{" "}
-                reviews
+                {rating ? rating.toPrecision(2) : 0} | {numOfRating} reviews
               </p>
             </div>
 
@@ -78,10 +78,10 @@ const page = async ({ params }: { params: { id: string } }) => {
       </div>
 
       {/* Specification others */}
-      <BookSpec />
+      <BookSpec book={response.data} />
 
       {/* Reviews and others sect */}
-      <Reviews bookId={id} totalReviews={data.data.numOfRating} />
+      <Reviews bookId={id} totalReviews={numOfRating} />
     </div>
   );
 };

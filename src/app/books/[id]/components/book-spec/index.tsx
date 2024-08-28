@@ -1,6 +1,12 @@
+import { Book } from "../../../../../types/Book";
 import DescriptionSect from "../description-sect";
 
-const BookSpec = () => {
+type Props = {
+  book: Book;
+};
+
+const BookSpec = (props: Props) => {
+  const { book } = props;
   return (
     <div className="flex flex-col items-center max-w-7xl w-[90%] shadow-sm rounded-md py-14 mb-10 border border-gray-200">
       {/* Book Specification */}
@@ -9,7 +15,7 @@ const BookSpec = () => {
           Book Specification & Summary
         </h1>
         {/* Description Sect */}
-        <DescriptionSect />
+        <DescriptionSect book={book} />
       </div>
     </div>
   );
