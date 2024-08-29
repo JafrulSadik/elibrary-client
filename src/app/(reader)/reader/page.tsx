@@ -1,5 +1,5 @@
 const page = () => {
-  return <div>page</div>;
+  return <div className="min-h-screen flex justify-center w-full"></div>;
 };
 
 export default page;
