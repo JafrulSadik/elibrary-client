@@ -4,7 +4,12 @@ import useElementWidth from "../../../../../../hooks/useElementWidth";
 import DisplayBook from "../display-book";
 import ReaderMenu from "../reader-menu";
 
-const BookReader = () => {
+type Props = {
+  book: string;
+};
+
+const BookReader = (props: Props) => {
+  const { book } = props;
   const [width, setWidth] = useState<number>(0);
   const [color, setColor] = useState("");
   const [divRef, divWidth] = useElementWidth<HTMLDivElement>({
@@ -20,7 +25,6 @@ const BookReader = () => {
   }
 
   function handleColor({ selectedColor }: { selectedColor: string }) {
-    console.log({ selectedColor });
     setColor(selectedColor);
   }
 
@@ -63,6 +67,7 @@ const BookReader = () => {
           width={divWidth}
           pageNumber={pageNumber}
           selectedColor={color}
+          book={book}
         />
       </div>
       <div className="my-3 bg-crusta-50 p-1 md:p-2 border border-gray-300  rounded-md">

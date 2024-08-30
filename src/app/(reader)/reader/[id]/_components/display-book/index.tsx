@@ -4,6 +4,7 @@ import { Document, Page, pdfjs } from "react-pdf";
 
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
+import BookLoader from "../book-loader";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
@@ -15,23 +16,24 @@ type Props = {
   pageNumber: number;
   width: number;
   selectedColor: string;
+  book: string;
 };
 
 const DisplayBook = (props: Props) => {
+  const { book } = props;
   const { pageNumber, handleloadSuccess, width, selectedColor } = props;
-
-  const samplePDF =
-    "https://res.cloudinary.com/dykgzydmw/raw/upload/v1723928999/elibrary/book-files/mf1llgxr8jct1mucwb8i.pdf";
 
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     handleloadSuccess({ numPages });
   }
 
-  console.log(selectedColor);
-
   return (
     <>
-      <Document file={samplePDF} onLoadSuccess={onDocumentLoadSuccess}>
+      <Document
+        file={book}
+        onLoadSuccess={onDocumentLoadSuccess}
+        loading={<BookLoader width={width} />}
+      >
         <Page
           pageNumber={pageNumber}
           width={width}
