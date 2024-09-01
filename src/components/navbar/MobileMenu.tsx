@@ -63,12 +63,13 @@ const MobileMenu = ({ user }: any) => {
               />
             </div>
           ) : (
-            <button
+            <Link
+              href="/login"
               type="submit"
               className="px-3 py-1 hover:text-white rounded-md text-[12px] hover:bg-gradient-to-b hover:from-crusta-500 hover:to-crusta-600 bg-none text-crusta-600 border border-crusta-600"
             >
               Login
-            </button>
+            </Link>
           )}
         </div>
       </div>

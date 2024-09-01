@@ -45,9 +45,12 @@ const BookCard = (props: Props) => {
 
         <div className="flex items-center gap-1 md:gap-2">
           <Remove bookId={book._id} />
-          <button className="w-14 py-1 lg:py-2 md:w-24 text-center  rounded-md text-white text-xs md:text-sm shadow-md bg-crusta-950 hover:bg-crusta-900">
+          <Link
+            href={`/reader/${book._id}`}
+            className="w-14 py-1 lg:py-2 md:w-24 text-center  rounded-md text-white text-xs md:text-sm shadow-md bg-crusta-950 hover:bg-crusta-900"
+          >
             Read
-          </button>
+          </Link>
         </div>
       </div>
     </div>
