@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { Book } from "../../../../../types/Book";
+import Ratings from "../rating/Rating";
 
 type Props = {
   book: Book;
@@ -43,13 +43,10 @@ const AllBooksCard = (props: Props) => {
         <p className="font-light text-green-500 text-sm">
           Downloads ({book?.downloads})
         </p>
-        <div className="flex gap-1 text-yellow-500">
-          <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStarHalfAlt />
-        </div>
+        <Ratings
+          numOfRating={book.numOfRating}
+          totalRating={book.totalRating}
+        />
       </div>
     </div>
   );

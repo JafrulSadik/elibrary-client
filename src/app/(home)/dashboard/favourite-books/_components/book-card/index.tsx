@@ -1,9 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaStar } from "react-icons/fa";
-import { FaStarHalfStroke } from "react-icons/fa6";
 import { Book } from "../../../../../../types/Book";
 import Remove from "../../../_components/remove";
+import Ratings from "../rating/Ratings";
 
 type Props = {
   book: Book;
@@ -34,13 +33,10 @@ const BookCard = (props: Props) => {
           >
             {book?.genre?.title}
           </Link>
-          <div className="flex text-yellow-500 md:gap-1">
-            <FaStar className="size-3 md:size-4" />
-            <FaStar className="size-3 md:size-4" />
-            <FaStar className="size-3 md:size-4" />
-            <FaStar className="size-3 md:size-4" />
-            <FaStarHalfStroke className="size-3 md:size-4" />
-          </div>
+          <Ratings
+            totalRating={book.totalRating}
+            numOfRating={book.numOfRating}
+          />
         </div>
 
         <div className="flex items-center gap-1 md:gap-2">

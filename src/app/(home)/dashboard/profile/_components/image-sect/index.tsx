@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { ChangeEvent, useRef, useState } from "react";
 import { FaPen } from "react-icons/fa";
-import ProfileImg from "../../../../../../public/images/writers/writer-1.png";
+import ProfileImg from "../../../../../../../public/images/writers/writer-1.png";
 import "./input-style.css";
 
 const ImageSect = () => {

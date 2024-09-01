@@ -28,7 +28,7 @@ export async function login(formData: LoginSchemaType) {
     const response = (await data.json()) as ApiResponseSingleData<UserAuth>;
 
     if (response.code === 200) {
-      const expires = new Date(Date.now() + 15 * 1000);
+      const expires = new Date(Date.now() + 23 * 60 * 60 * 1000);
       const user = response.data.user;
       const token = response.data.tokens;
 
