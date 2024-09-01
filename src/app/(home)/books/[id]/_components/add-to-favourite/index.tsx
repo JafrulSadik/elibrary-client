@@ -1,13 +1,11 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { GrFavorite } from "react-icons/gr";
 import { IoMdCheckmark } from "react-icons/io";
 import { notify } from "../../../../../../lib/notify";
-import {
-  addToFavourite,
-  isAddedToFavourite,
-} from "../../../../../action/book-action";
+import { addToFavourite } from "../../../../../action/book-action";
 
 type Props = {
   isFavourite?: boolean;
@@ -19,13 +17,26 @@ const AddToFavourite = (props: Props) => {
   const [loading, setLoading] = useState(false);
   const [favourite, setFavourite] = useState(isFavourite);
 
+  const router = useRouter();
+
   const handleAddToFavourite = async () => {
     setLoading(true);
-    await addToFavourite({ bookId });
-    const response = await isAddedToFavourite({ bookId });
+    const response = await addToFavourite({ bookId });
 
-    setFavourite(response.data);
-    notify({ message: "Book added to the favourite." });
+    if (response.code === 200) {
+      setFavourite((prev) => !prev);
+      if (!favourite) {
+        notify({ message: "Book added to the favourites." });
+      } else {
+        notify({ message: "Book removed from favourites." });
+      }
+    } else if (response.code === 401) {
+      setLoading(false);
+      router.push("/login");
+    } else {
+      notify({ message: response.message });
+    }
+
     setLoading(false);
   };
 

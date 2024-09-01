@@ -1,27 +1,6 @@
 "use server";
-import { AuthError } from "next-auth";
-import { LoginSchemaType } from "../(auth)/login/_components/login-form";
 import { RegistrationFormType } from "../(auth)/register/_components/registration-form";
-import { signIn, signOut } from "../../lib/auth";
-
-export const loginWithCredintial = async (props: LoginSchemaType) => {
-  try {
-    await signIn("credentials", { ...props, redirect: false });
-  } catch (error) {
-    if (error instanceof AuthError) {
-      if (error.cause?.err instanceof Error) {
-        return error.cause.err.message; // return "custom error"
-      }
-      switch (error.type) {
-        case "CredentialsSignin":
-          return "Invalid credentials";
-        default:
-          return "Something went wrong";
-      }
-    }
-    return error;
-  }
-};
+import { signOut } from "../../lib/auth";
 
 export const userRegistration = async (props: RegistrationFormType) => {
   try {

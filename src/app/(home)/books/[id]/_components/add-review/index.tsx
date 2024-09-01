@@ -32,7 +32,7 @@ const AddReview = (props: Props) => {
     setReviewModal((prev) => !prev);
   };
 
-  const handleReview = async () => {
+  const handleAddReview = async () => {
     if (!review && !rating) {
       setError(true);
       setErrorMessage("* Review or rating is required.");
@@ -49,6 +49,8 @@ const AddReview = (props: Props) => {
         setLoading(false);
         setReviewModal(false);
         router.refresh();
+      } else if (response.code === 401) {
+        router.push("/login");
       } else {
         setLoading(false);
         setError(true);
@@ -66,7 +68,7 @@ const AddReview = (props: Props) => {
       {reviewModal && (
         <div className="fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#291515bb] backdrop-blur-sm z-20">
           <form
-            action={handleReview}
+            action={handleAddReview}
             className="flex flex-col bg-crusta-400 shadow-md justify-center  w-96 mx-6 rounded-md p-5 gap-4 relative"
           >
             <h1 className="text-lg text-[#ffffffb4] text-center rounded-md font-bold">

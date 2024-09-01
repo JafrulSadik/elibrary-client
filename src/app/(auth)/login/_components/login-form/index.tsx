@@ -8,7 +8,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { RiLoader2Line } from "react-icons/ri";
 import { z } from "zod";
-import { loginWithCredintial } from "../../../../action/auth-action";
+import { login } from "../../../../../lib/auth";
 
 const LoginSchema = z.object({
   email: z.string().min(1, "* Email is requried").email(),
@@ -42,24 +42,19 @@ const LoginForm = () => {
     });
 
   const onSubmit: SubmitHandler<LoginSchemaType> = async (formData) => {
-    try {
-      setLoading(true);
+    setLoading(true);
 
-      const response: any = await loginWithCredintial(formData);
-      if (!!response) {
-        setError("root", {
-          message: response,
-        });
-      } else {
-        notify();
-        router.refresh();
-      }
-      setLoading(false);
-    } catch (error) {
+    const response = await login(formData);
+
+    if (response.code !== 200) {
       setError("root", {
-        message: "Something went wrong.",
+        message: response.message,
       });
+    } else {
+      notify();
+      router.back();
     }
+    setLoading(false);
   };
 
   return (

@@ -13,7 +13,7 @@ const Reviews = async (props: Props) => {
 
   const { bookId, totalReviews } = props;
 
-  const isLoggedIn = !!session?.user;
+  const isLoggedIn = session?.isAuthenticated;
 
   return (
     <div className="flex flex-col items-center max-w-7xl w-[90%] shadow-sm rounded-md pt-14 mb-10 border border-gray-200">

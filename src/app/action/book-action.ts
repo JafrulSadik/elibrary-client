@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { config } from "../../config/config";
 import { auth } from "../../lib/auth";
 import {
@@ -33,11 +34,6 @@ type FavouriteBooksProps = {
 
 type BooleanType = true | false;
 
-type AddToFavouriteResponse = {
-  code: string;
-  message: string;
-};
-
 type GetReviewProps = {
   bookId: string;
   limit: number;
@@ -45,6 +41,10 @@ type GetReviewProps = {
 
 export const createBook = async (formData: FormData) => {
   const session = await auth();
+
+  if (!session.isAuthenticated) {
+    redirect("/login");
+  }
 
   try {
     const response = await fetch(`${config.baseUrl}/api/v1/books/`, {
@@ -67,11 +67,15 @@ export const createBook = async (formData: FormData) => {
 
 export const getUserBooks = async (props: GetUserBooksProps) => {
   const { page } = props;
-  try {
-    const session = await auth();
+  const session = await auth();
 
+  if (!session.isAuthenticated) {
+    redirect("/login");
+  }
+
+  try {
     const response = await fetch(
-      `${config.baseUrl}/api/v1/users/${session?.user.id}/all-books?limit=5&page=${page}`,
+      `${config.baseUrl}/api/v1/users/${session?.user?.id}/all-books?limit=5&page=${page}`,
       {
         headers: {
           Authorization: session?.tokens?.accessToken || "",
@@ -112,8 +116,13 @@ export const getBooks = async ({ searchUrl }: { searchUrl?: string }) => {
 };
 
 export const deleteBook = async ({ bookId }: { bookId: string }) => {
+  const session = await auth();
+
+  if (!session.isAuthenticated) {
+    redirect("/login");
+  }
+
   try {
-    const session = await auth();
     const response = await fetch(`${config.baseUrl}/api/v1/books/${bookId}`, {
       method: "DELETE",
       headers: {
@@ -132,9 +141,17 @@ export const deleteBook = async ({ bookId }: { bookId: string }) => {
 
 export const addReview = async (props: ReviewProps) => {
   const { bookId, review, rating } = props;
-  try {
-    const session = await auth();
+  const session = await auth();
 
+  if (!session.isAuthenticated) {
+    return {
+      code: 401,
+      message: "Authentication required",
+      data: false,
+    };
+  }
+
+  try {
     const response = await fetch(
       `${config.baseUrl}/api/v1/books/${bookId}/reviews/`,
       {
@@ -151,13 +168,20 @@ export const addReview = async (props: ReviewProps) => {
     );
 
     if (!response.ok) {
-      throw new Error("Failed to add review.");
+      return {
+        code: 500,
+        message: "Failed to add review",
+      };
     }
 
     const data = (await response.json()) as AddReviewResponse<Reviews>;
+
     return data;
   } catch (error) {
-    throw new Error("Failed to add review.");
+    return {
+      code: 500,
+      message: "Failed to add review",
+    };
   }
 };
 
@@ -192,6 +216,10 @@ export const getFavouriteBooks = async (props: FavouriteBooksProps) => {
   const { page = 1 } = props;
   const session = await auth();
 
+  if (!session.isAuthenticated) {
+    redirect("/login");
+  }
+
   const response = await fetch(
     `${config?.baseUrl}/api/v1/favourite/books/${session?.user?.id}?page=${page}`,
     {
@@ -215,30 +243,48 @@ export const getFavouriteBooks = async (props: FavouriteBooksProps) => {
 };
 
 export const addToFavourite = async (props: { bookId: string }) => {
-  const session = await auth();
   const { bookId } = props;
+  const session = await auth();
 
-  const response = await fetch(`${config.baseUrl}/api/v1/favourite/add`, {
-    method: "PATCH",
-    body: JSON.stringify({
-      userId: session?.user.id,
-      bookId: bookId,
-    }),
-    headers: {
-      "content-type": "application/json",
-      Authorization: `bearer ${session?.tokens?.accessToken}` || "",
-    },
-  });
-
-  revalidatePath("/dasboard/favourite-books");
-
-  if (!response.ok) {
-    throw new Error("Fatch data failed!");
+  if (!session.isAuthenticated) {
+    return {
+      code: 401,
+      message: "Authentication required.",
+      data: false,
+    };
   }
 
-  const data = (await response.json()) as AddToFavouriteResponse;
+  try {
+    const response = await fetch(`${config.baseUrl}/api/v1/favourite/add`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        userId: session?.user?.id,
+        bookId: bookId,
+      }),
+      headers: {
+        "content-type": "application/json",
+        Authorization: `bearer ${session?.tokens?.accessToken}` || "",
+      },
+    });
 
-  return data;
+    revalidatePath("/dasboard/favourite-books");
+
+    if (!response.ok) {
+      return {
+        code: 500,
+        message: "Failed to add book in favourite list.",
+      };
+    }
+
+    const data = (await response.json()) as ApiResponseSingleData<BooleanType>;
+
+    return data;
+  } catch (error) {
+    return {
+      code: 500,
+      message: "Failed to add review",
+    };
+  }
 };
 
 export const countReviews = async (props: { bookId: string }) => {
@@ -263,6 +309,14 @@ export const countReviews = async (props: { bookId: string }) => {
 export const isAddedToFavourite = async (props: { bookId: string }) => {
   const session = await auth();
   const { bookId } = props;
+
+  if (!session.isAuthenticated) {
+    return {
+      code: 401,
+      message: "",
+      data: false,
+    };
+  }
 
   const response = await fetch(
     `${config?.baseUrl}/api/v1/favourite/${session?.user?.id}/${bookId}`,
