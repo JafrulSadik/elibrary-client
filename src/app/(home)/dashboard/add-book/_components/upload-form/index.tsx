@@ -114,7 +114,7 @@ const UploadBookForm = () => {
         });
       } else {
         notify();
-        router.push("/dashboard");
+        router.push("/dashboard/my-books");
       }
 
       setLoading(false);
@@ -206,6 +206,7 @@ const UploadBookForm = () => {
         <input
           className="selector p-2 rounded-sm border-[0.5px] outline-none border-gray-200 font-base"
           type="file"
+          accept="image/*"
           {...register("coverImage")}
         />
       </div>
@@ -221,6 +222,7 @@ const UploadBookForm = () => {
         <input
           className="p-2 rounded-sm border-[0.5px] outline-none border-gray-200 font-base"
           type="file"
+          accept="application/pdf"
           {...register("pdfFile")}
         />
       </div>
