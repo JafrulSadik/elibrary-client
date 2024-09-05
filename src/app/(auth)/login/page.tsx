@@ -1,6 +1,11 @@
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { auth } from "../../../lib/auth";
-import LoginForm from "./_components/login-form";
+import LoginForm from "./_components/login-form/LoginForm";
+
+export const metadata: Metadata = {
+  title: "Login to Elibrary",
+};
 
 const page = async () => {
   const session = await auth();

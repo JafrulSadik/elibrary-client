@@ -1,4 +1,9 @@
+import { Metadata } from "next";
 import RegisterForm from "./_components/registration-form";
+
+export const metadata: Metadata = {
+  title: "Create your E-Library account",
+};
 
 const page = () => {
   return (

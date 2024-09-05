@@ -1,12 +1,36 @@
+import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import DownloadBtn from "../../../../components/buttons/download-btn";
 import PreviewBtn from "../../../../components/buttons/preview-btn";
+import { config } from "../../../../config/config";
 import { auth } from "../../../../lib/auth";
 import { getBooksById, isAddedToFavourite } from "../../../action/book-action";
 import AddToFavourite from "./_components/add-to-favourite";
 import BookSpec from "./_components/book-spec";
 import Ratings from "./_components/ratings";
 import Reviews from "./_components/review-rating/Reviews";
+
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const id = params.id;
+
+  // fetch data
+  const product = await fetch(`${config.baseUrl}/api/v1/books/${id}`).then(
+    (res) => res.json()
+  );
+
+  return {
+    title: product.data.title,
+  };
+}
 
 const page = async ({ params }: { params: { id: string } }) => {
   const session = await auth();
