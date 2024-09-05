@@ -3,8 +3,6 @@ import RatingFilter from "../rating-filter";
 import TopWriters from "../top-writers";
 
 const SideBar = () => {
-  // const genre = await getAllGenre()
-
   return (
     <div className=" rounded-md border border-gray-300  min-h-[840px] p-5">
       {/* Popular Cateogry */}

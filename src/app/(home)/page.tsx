@@ -2,15 +2,12 @@ import Slider from "../../components/slider";
 import WriterCard from "../../components/writer-card";
 import WriterCard2 from "../../components/writer-card/extra/WriterCard";
 import WriterCard1 from "../../components/writer-card/extra/WriterCard1";
-import { auth } from "../../lib/auth";
 import AllBooks from "./_components/all-books";
 import CategorySect from "./_components/category-sect";
 import LatestBooks from "./_components/latest-books";
 import PopularBooks from "./_components/popular-books";
 
 export default async function Home() {
-  const session = await auth();
-
   return (
     <main className="flex flex-col items-center min-h-screen">
       <Slider />
