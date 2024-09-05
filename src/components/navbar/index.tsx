@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { auth, signOut } from "../../lib/auth";
 import LogoutBtn from "../logout-btn";
 import Logo from "./../../../public/images/logo3.png";
@@ -12,6 +13,7 @@ const Navbar = async () => {
 
   const handleLogout = async (event: React.MouseEvent<HTMLButtonElement>) => {
     await signOut();
+    redirect("/login");
   };
 
   return (
@@ -41,7 +43,7 @@ const Navbar = async () => {
 
         {/* Right Section */}
         <div className="flex justify-end flex-1  gap-2">
-          {session?.user ? (
+          {session?.isAuthenticated ? (
             <div className="flex gap-8 items-center">
               <ProfileBtn user={session ? session?.user : ""} />
               <LogoutBtn />
@@ -68,7 +70,7 @@ const Navbar = async () => {
       </div>
 
       <div className="h-16 w-full lg:hidden">
-        <MobileMenu user={session ? session?.user : ""} />
+        <MobileMenu user={session.isAuthenticated ? session?.user : ""} />
       </div>
     </div>
   );

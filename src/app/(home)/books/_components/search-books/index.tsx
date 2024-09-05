@@ -14,8 +14,6 @@ const SearchBooks = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
-  const [page, setPage] = useState(1);
   const [data, setData] = useState<Book[]>([]);
   const [totalPage, setTotalPage] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -41,9 +39,10 @@ const SearchBooks = () => {
   };
 
   const handlePageNumber = (props: { selected: number }) => {
-    setPage(props.selected + 1);
+    const { selected } = props;
+    const pageNum = selected + 1;
     const params = new URLSearchParams(searchParams);
-    params.set("page", page.toString());
+    params.set("page", pageNum.toString());
     router.push(`${pathname}?${params.toString()}`);
   };
 

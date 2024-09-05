@@ -1,8 +1,8 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { LoginSchemaType } from "../app/(auth)/login/_components/login-form";
+
+import { LoginSchemaType } from "../app/(auth)/login/_components/login-form/LoginForm";
 import { config } from "../config/config";
 import { ApiResponseSingleData } from "../types/ApiResponse";
 import { UserAuth } from "../types/UserAuth";
@@ -69,7 +69,6 @@ export async function getSession(key: string) {
 export async function signOut() {
   cookies().set("token", "", { expires: new Date(0) });
   cookies().set("user", "", { expires: new Date(0) });
-  redirect("/login");
 }
 
 export type AuthType =
