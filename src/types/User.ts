@@ -5,3 +5,10 @@ export type User = {
   email: string;
   about: string;
 };
+
+export type PopularAuthorType = {
+  _id: string;
+  name: string;
+  totalBooks: number;
+  totalDownloads: number;
+};
