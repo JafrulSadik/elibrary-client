@@ -5,6 +5,7 @@ type Props = {
   className?: string;
   height?: number;
   width?: number;
+  authorImg?: string;
 };
 
 const WriterRandomImage = (props: Props) => {

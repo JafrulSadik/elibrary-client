@@ -3,7 +3,8 @@ export type User = {
   name: string;
   role: string;
   email: string;
-  about: string;
+  about?: string;
+  profileImg?: string;
 };
 
 export type PopularAuthorType = {

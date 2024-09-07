@@ -1,7 +1,7 @@
 import { Genre } from "./Genre";
 import { User } from "./User";
 
-type UserType = Pick<User, "_id" | "name">;
+type UserType = Pick<User, "_id" | "name" | "about" | "profileImg">;
 
 export type Book = {
   _id: string;
