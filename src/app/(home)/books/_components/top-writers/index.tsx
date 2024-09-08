@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import usePopularAuthors from "../../../../../hooks/useAuthorData";
 
@@ -50,12 +49,12 @@ const TopWriters = () => {
             <div key={author._id}>
               <div className="flex items-center px-3 gap-2 py-1">
                 <input
-                  checked={selected}
+                  checked={selected || false}
                   onChange={() => handleAuthorSelect(author._id)}
                   type="checkbox"
                   className="accent-peace-400 "
                 />
-                <Link href="">{author.name}</Link>
+                <p>{author.name}</p>
               </div>
               <hr className="bg-gray-300 h-[0.5px] my-1" />
             </div>
