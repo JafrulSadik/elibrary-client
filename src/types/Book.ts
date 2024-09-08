@@ -44,6 +44,7 @@ export type GetBooksProps = {
 export type Reviews = {
   bookId: string;
   authorId: User;
+  profileImg?: string;
   rating?: number;
   comment?: string;
   _id: string;

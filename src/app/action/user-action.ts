@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { config } from "../../config/config";
@@ -10,9 +11,16 @@ import {
 } from "../../types/ApiResponse";
 import { PopularAuthorType, User } from "../../types/User";
 
-export const popularAuthor = async () => {
+type Props = {
+  limit: number | undefined;
+};
+
+export const popularAuthor = async (props: Props) => {
+  const limit = props?.limit;
   try {
-    const response = await fetch(`${config.baseUrl}/api/v1/author/popular`);
+    const response = await fetch(
+      `${config.baseUrl}/api/v1/author/popular?${limit ? `limit=${limit}` : ""}`
+    );
 
     if (!response.ok) {
     }
@@ -83,6 +91,7 @@ export const updateUser = async (formData: FormData) => {
     const data = (await response.json()) as ApiResponseSingleData<User>;
 
     cookies().set("user", JSON.stringify(data.data));
+    revalidatePath("/");
 
     return data;
   } catch (error) {

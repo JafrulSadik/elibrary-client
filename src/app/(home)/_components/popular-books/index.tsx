@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import StarIcon from "../../../../../public/icons/star/StarIcon";
+import StarIcon from "../../../../assets/Icons/star/StarIcon";
 import Card from "../../../../components/card";
 import { ApiSuccessfullResponse } from "../../../../types/ApiResponse";
 import { Book, PaginationType } from "../../../../types/Book";

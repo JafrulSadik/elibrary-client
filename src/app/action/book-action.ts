@@ -167,6 +167,8 @@ export const addReview = async (props: ReviewProps) => {
       }
     );
 
+    revalidatePath(`/books/${bookId}`);
+
     if (!response.ok) {
       return {
         code: 500,

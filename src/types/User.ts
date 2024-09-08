@@ -10,6 +10,7 @@ export type User = {
 export type PopularAuthorType = {
   _id: string;
   name: string;
+  profileImg?: string;
   totalBooks: number;
   totalDownloads: number;
 };

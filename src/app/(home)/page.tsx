@@ -1,13 +1,15 @@
 import Slider from "../../components/slider";
 import WriterCard from "../../components/writer-card";
-import WriterCard2 from "../../components/writer-card/extra/WriterCard";
-import WriterCard1 from "../../components/writer-card/extra/WriterCard1";
+import { popularAuthor } from "../action/user-action";
 import AllBooks from "./_components/all-books";
 import CategorySect from "./_components/category-sect";
 import LatestBooks from "./_components/latest-books";
 import PopularBooks from "./_components/popular-books";
 
 export default async function Home() {
+  const response = await popularAuthor({ limit: 3 });
+  const authors = response.data;
+
   return (
     <main className="flex flex-col items-center min-h-screen">
       <Slider />
@@ -39,10 +41,11 @@ export default async function Home() {
           Top Writers
         </h1>
 
-        <div className="flex flex-wrap justify-center gap-10 lg:gap-14 max-w-7xl w-[90%] my-9 px-10 md:px-20">
-          <WriterCard />
-          <WriterCard1 />
-          <WriterCard2 />
+        <div className=" flex flex-wrap justify-center gap-10 lg:gap-14 max-w-7xl w-[90%] my-9 px-5 md:px-20">
+          {authors &&
+            authors.map((author) => (
+              <WriterCard key={author._id} author={author} />
+            ))}
         </div>
       </div>
     </main>

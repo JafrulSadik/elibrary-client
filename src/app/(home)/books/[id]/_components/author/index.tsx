@@ -12,10 +12,10 @@ const Author = (props: Props) => {
       <div className="m-auto p-3 rounded-md  border-[10px] border-gray-100 shadow-sm">
         <Image
           src={book.author.profileImg || NoProfileImg}
+          className="object-cover w-32 h-32 rounded-md shadow-md"
           alt="author_img.jpg"
           height={200}
           width={200}
-          className="rounded-sm"
         />
       </div>
       <div className="flex flex-col text-sm p-3 rounded-md  border-[10px] border-gray-100 shadow-sm gap-2">
