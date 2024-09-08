@@ -6,7 +6,7 @@ import { GrFavorite } from "react-icons/gr";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { LuBook } from "react-icons/lu";
 import { MdOutlinePerson } from "react-icons/md";
-import Profile from "./../../../public/images/user/writer-1.png";
+import NoProfilePic from "../../assets/Images/ProfileImg/image.png";
 
 const ProfileBtn = (props: { user: any }) => {
   const { user } = props;
@@ -18,10 +18,10 @@ const ProfileBtn = (props: { user: any }) => {
       // onClick={() => setDropDown((prev) => !prev)}
     >
       <Image
-        className="rounded-full border-2 border-crusta-300 w-9 h-9"
-        src={Profile}
-        height="0"
-        width="0"
+        className="rounded-full border-2 border-crusta-300 w-9 h-9 object-cover"
+        src={user?.profileImg ? user?.profileImg : NoProfilePic}
+        height="100"
+        width="100"
         alt="Profile"
       />
       <div className="flex">

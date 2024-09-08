@@ -1,12 +1,11 @@
 "use client";
+import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
+import HeroImg from "./../../assets/Images/HeroCover/heroCover.png";
 
+// Import Swiper React components
 import "swiper/css";
 import "swiper/css/pagination";
-
-import Image from "next/image";
-import HeroImg from "./../../../public/images/hero-1.png";
-// Import Swiper React components
 
 const Slider = () => {
   return (

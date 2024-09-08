@@ -1,7 +1,7 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import SearchIcon from "../../../public/icons/search-icon";
+import SearchIcon from "../../assets/Icons/search-icon";
 
 const SearchForm = () => {
   const router = useRouter();

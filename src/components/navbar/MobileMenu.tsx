@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
-import Logo from "../../../public/images/logo3.png";
-import ProfileImg from "../../../public/images/user/writer-1.png";
+import NoProfilePic from "../../assets/Images/ProfileImg/image.png";
+import Logo from "./../../assets/Images/Logo/logo.png";
 
 const MobileMenu = ({ user }: any) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,10 +55,10 @@ const MobileMenu = ({ user }: any) => {
               <FaBookBookmark size={20} />
             </Link> */}
               <Image
-                src={ProfileImg}
+                src={user?.profileImg ? user?.profileImg : NoProfilePic}
                 className="rounded-full border border-crusta-350 h-8 w-8"
-                height="0"
-                width="0"
+                height={200}
+                width={200}
                 alt="profile.jpg"
               />
             </div>
@@ -95,14 +95,14 @@ const MobileMenu = ({ user }: any) => {
             <div className="flex justify-between h-16 px-4 items-center  border-b-2 border-gray-200">
               <div className="flex gap-4 items-center">
                 <Image
-                  src={ProfileImg}
-                  className="h-8 w-8"
-                  height="0"
-                  width="0"
+                  src={user.profileImg ? user.profileImg : NoProfilePic}
+                  className="h-8 w-8 object-cover rounded-full"
+                  height={200}
+                  width={200}
                   alt="profile.jpg"
                 />
 
-                <p className="text-crusta-950 font-medium">Symon Sadik</p>
+                <p className="text-crusta-950 font-medium">{user.name}</p>
               </div>
 
               <RxCross2

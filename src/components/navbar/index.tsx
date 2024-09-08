@@ -3,7 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { auth, signOut } from "../../lib/auth";
 import LogoutBtn from "../logout-btn";
-import Logo from "./../../../public/images/logo3.png";
+import Logo from "./../../assets/Images/Logo/logo.png";
 import MobileMenu from "./MobileMenu";
 import ProfileBtn from "./ProfileBtn";
 import SearchForm from "./SearchForm";

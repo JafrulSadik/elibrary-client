@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FiInstagram, FiYoutube } from "react-icons/fi";
 import { RiFacebookCircleLine } from "react-icons/ri";
-import Logo from "../../../public/images/logo.png";
+import Logo from "../../assets/Images/LogoWhite/logo.png";
 
 const Footer = () => {
   return (
