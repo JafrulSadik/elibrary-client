@@ -66,8 +66,8 @@ const page = async ({ params }: { params: { id: string } }) => {
               <Image
                 src={cover}
                 alt=""
-                width="100"
-                height="100"
+                width={300}
+                height={300}
                 quality={100}
                 className="absolute object-contain  h-full z-20 w-full"
               />

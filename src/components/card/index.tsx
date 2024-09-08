@@ -24,8 +24,8 @@ const Card = (props: Props) => {
         <Image
           src={book?.cover}
           alt=""
-          height={100}
-          width={60}
+          height={300}
+          width={300}
           className="w-[60%]  z-20 object-contain"
         />
       </div>
