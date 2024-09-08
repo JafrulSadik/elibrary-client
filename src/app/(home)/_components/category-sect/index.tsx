@@ -30,7 +30,7 @@ const CategorySect = () => {
     title: "",
     code: 0,
   });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState<Genre[]>([]);
   const [books, setBooks] = useState<Book[]>([]);
 
@@ -100,7 +100,11 @@ const CategorySect = () => {
             </Link>
           </div>
 
-          {books.length ? (
+          {loading ? (
+            <div className="flex justify-center items-center h-64">
+              <p>Loading...</p>
+            </div>
+          ) : books.length ? (
             <div className="w-full">
               <Swiper
                 slidesPerView={1}

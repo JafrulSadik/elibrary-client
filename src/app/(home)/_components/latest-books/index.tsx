@@ -8,7 +8,7 @@ import { Book, PaginationType } from "../../../../types/Book";
 import { getBooks } from "../../../action/book-action";
 
 const LatestBooks = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [books, setBooks] = useState<Book[]>([]);
 
   const fetchBooks = async () => {
@@ -34,8 +34,11 @@ const LatestBooks = () => {
           </div>
           <h1 className="text-sm md:text-base font-bold">Latest Books</h1>
         </div>
-
-        {books.length ? (
+        {loading ? (
+          <div className="flex justify-center items-center h-64">
+            <p>Loading...</p>
+          </div>
+        ) : books.length ? (
           <div className="w-full">
             <Swiper
               slidesPerView={1}

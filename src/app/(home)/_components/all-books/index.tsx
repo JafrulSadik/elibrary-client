@@ -8,14 +8,32 @@ import { ApiSuccessfullResponse } from "../../../../types/ApiResponse";
 import { Book, PaginationType } from "../../../../types/Book";
 import { getBooks } from "../../../action/book-action";
 
+const breakPoints = {
+  320: {
+    slidesPerView: 2,
+  },
+  500: {
+    slidesPerView: 3,
+    spaceBetween: 30,
+  },
+  860: {
+    slidesPerView: 4,
+    spaceBetween: 30,
+  },
+  1200: {
+    slidesPerView: 5,
+    spaceBetween: 30,
+  },
+};
+
 const AllBooks = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [books, setBooks] = useState<Book[]>([]);
 
   const fetchBooks = async () => {
     setLoading(true);
     const response = (await getBooks({
-      searchUrl: "",
+      searchUrl: "?limit=5",
     })) as ApiSuccessfullResponse<Book, PaginationType>;
     setBooks(response.data);
     setLoading(false);
@@ -33,28 +51,15 @@ const AllBooks = () => {
           <h1 className="text-sm md:text-base font-bold">All Books</h1>
           <Link href="">Show More</Link>
         </div>
-
-        {books.length ? (
+        {loading ? (
+          <div className="flex justify-center items-center h-64">
+            <p>Loading...</p>
+          </div>
+        ) : books.length ? (
           <div className="w-full">
             <Swiper
               slidesPerView={1}
-              breakpoints={{
-                320: {
-                  slidesPerView: 2,
-                },
-                500: {
-                  slidesPerView: 3,
-                  spaceBetween: 30,
-                },
-                860: {
-                  slidesPerView: 4,
-                  spaceBetween: 30,
-                },
-                1200: {
-                  slidesPerView: 5,
-                  spaceBetween: 30,
-                },
-              }}
+              breakpoints={breakPoints}
               spaceBetween={5}
             >
               {books?.map((book) => (
