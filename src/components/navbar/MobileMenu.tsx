@@ -4,11 +4,17 @@ import Link from "next/link";
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import NoProfilePic from "../../assets/Images/ProfileImg/image.png";
+import { signOut } from "../../lib/auth";
 import Logo from "./../../assets/Images/Logo/logo.png";
 
 const MobileMenu = ({ user }: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenProfile, setIsOpenProfile] = useState(false);
+
+  const handleLogout = async () => {
+    await signOut();
+    setIsOpenProfile(false);
+  };
 
   return (
     <div className="flex relative h-full items-center justify-center">
@@ -76,11 +82,32 @@ const MobileMenu = ({ user }: any) => {
 
       {isOpen && (
         <div className="absolute left-0 top-16 w-full h-[calc(100vh-64px)] bg-[#ffffffb1] backdrop-blur-md flex flex-col items-center justify-center gap-8 font-normal text-base  z-30">
-          <Link href="/">Home</Link>
-          <Link href="/">Category</Link>
-          <Link href="/">Your Books</Link>
-          <Link href="/">Favorite</Link>
-          <Link href="/">Login</Link>
+          <Link href="/" onClick={() => setIsOpen(false)}>
+            Home
+          </Link>
+          <Link href="/books" onClick={() => setIsOpen(false)}>
+            All Books
+          </Link>
+          <Link href="/books?sort_type=dec" onClick={() => setIsOpen(false)}>
+            Latest Books
+          </Link>
+          <Link
+            href="/books?sort_type=dec&sort_by=downloads"
+            onClick={() => setIsOpen(false)}
+          >
+            Popular Books
+          </Link>
+          <Link
+            href="/dashboard/favourite-books"
+            onClick={() => setIsOpen(false)}
+          >
+            Favorite
+          </Link>
+          {!user && (
+            <Link href="/login" onClick={() => setIsOpen(false)}>
+              Login
+            </Link>
+          )}
         </div>
       )}
 
@@ -113,28 +140,40 @@ const MobileMenu = ({ user }: any) => {
             </div>
 
             <div className=" text-crusta-950 font-medium py-3 px-8 ">
-              <Link href="/dashboard" className="">
+              <Link href="/dashboard" onClick={() => setIsOpenProfile(false)}>
                 Profile
               </Link>
             </div>
             <div className=" text-crusta-950 font-medium py-3 px-8 ">
-              <Link href="/dashboard/favourite-books" className="">
+              <Link
+                href="/dashboard/favourite-books"
+                onClick={() => setIsOpenProfile(false)}
+              >
                 Favourite
               </Link>
             </div>
             <div className=" text-crusta-950 font-medium py-3 px-8 ">
-              <Link href="/dashboard/my-books" className="">
+              <Link
+                href="/dashboard/my-books"
+                onClick={() => setIsOpenProfile(false)}
+              >
                 My Books
               </Link>
             </div>
             <div className=" text-crusta-950 font-medium py-3 px-8 ">
-              <Link href="/dashboard/add-book" className="">
+              <Link
+                href="/dashboard/add-book"
+                onClick={() => setIsOpenProfile(false)}
+              >
                 Add Book
               </Link>
             </div>
 
             <div className="px-2 my-4">
-              <button className="p-1 bg-peace-400 hover:bg-gray-800 text-white w-full rounded-md">
+              <button
+                onClick={handleLogout}
+                className="p-1 bg-peace-400 hover:bg-gray-800 text-white w-full rounded-md"
+              >
                 Logout
               </button>
             </div>
