@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import NoProfilePic from "../../assets/Images/ProfileImg/image.png";
 import { signOut } from "../../lib/auth";
@@ -15,6 +15,18 @@ const MobileMenu = ({ user }: any) => {
     await signOut();
     setIsOpenProfile(false);
   };
+
+  useEffect(() => {
+    if (isOpenProfile || isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpenProfile, isOpen]);
 
   return (
     <div className="flex relative h-full items-center justify-center">
@@ -112,7 +124,7 @@ const MobileMenu = ({ user }: any) => {
       )}
 
       {isOpenProfile && (
-        <div className="absolute flex right-0 top-0 h-screen w-full items-center justify-center font-normal text-base transition-all ease-in-out duration-1000 z-30">
+        <div className="absolute overflow-hidden flex right-0 top-0 h-screen w-full items-center justify-center font-normal text-base transition-all ease-in-out duration-1000 z-30">
           <div
             className="h-screen bg-crusta-950 opacity-60 flex-[0.3]"
             onClick={() => setIsOpenProfile((prev) => !prev)}
@@ -129,7 +141,9 @@ const MobileMenu = ({ user }: any) => {
                   alt="profile.jpg"
                 />
 
-                <p className="text-crusta-950 font-medium">{user.name}</p>
+                <p className="text-crusta-950 font-mediump max-w-20 truncate">
+                  {user.name}
+                </p>
               </div>
 
               <RxCross2

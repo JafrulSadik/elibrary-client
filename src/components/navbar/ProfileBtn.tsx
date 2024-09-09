@@ -25,7 +25,9 @@ const ProfileBtn = (props: { user: any }) => {
         alt="Profile"
       />
       <div className="flex">
-        <span className="text-crusta-400 capitalize">{user?.name}</span>
+        <span className="text-crusta-400 capitalize max-w-24 truncate">
+          {user?.name}
+        </span>
 
         <span className="text-crusta-400 mt-1">
           <IoMdArrowDropdown size={20} />
