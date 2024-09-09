@@ -14,9 +14,9 @@ const RegistraionFormSchema = z
   .object({
     firstName: z
       .string()
-      .min(3, "Name must be at least 3 characters long")
-      .max(10, "Name can be max 3 characters long."),
-    lastName: z.string(),
+      .min(3, "First name must be at least 3 characters.")
+      .max(10, "Name can't max 10 characters long."),
+    lastName: z.string().max(10, "Name can't be max 10 characters long."),
     email: z.string().min(1, "* Email is requried").email(),
     password: z
       .string()
@@ -160,7 +160,7 @@ const RegisterForm = () => {
         />
       </div>
       {!errors.password && !errors.root ? (
-        <p className="text-[#212121] text-xs font-medium mb-1 py-1 text-justify">
+        <p className="text-[#212121] font-normal text-xs mb-1 py-1 text-justify">
           Password must be at least 8 characters long also include at least one
           lowercase letter, one uppercase letter, one digit and one special
           character (e.g., @, #, $, %, &, *, etc.).
