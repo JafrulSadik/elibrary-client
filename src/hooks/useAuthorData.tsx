@@ -15,7 +15,7 @@ const usePopularAuthors = () => {
     setLoading(true); // Start loading
 
     try {
-      const response = await popularAuthor();
+      const response = await popularAuthor({ limit: 5 });
       setAuthors(response.data);
     } catch (error) {
       console.error("Error fetching reviews:", error);

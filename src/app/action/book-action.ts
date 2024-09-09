@@ -167,7 +167,7 @@ export const addReview = async (props: ReviewProps) => {
       }
     );
 
-    revalidatePath(`/books/${bookId}`);
+    revalidatePath(`/books/[${bookId}]`);
 
     if (!response.ok) {
       return {
