@@ -63,7 +63,7 @@ const CategorySect = () => {
   }, []);
 
   useEffect(() => {
-    if (selectedGenre._id) {
+    if (selectedGenre?._id) {
       fetchBooksByGenre({ genre: selectedGenre });
     }
   }, [selectedGenre]);
@@ -92,7 +92,7 @@ const CategorySect = () => {
                 <BiSolidCategory size={20} />
               </div>
               <h1 className="text-xs md:text-base font-bold text-crusta-950">
-                {selectedGenre.title}
+                {selectedGenre?.title}
               </h1>
             </div>
             <Link href="" className="text-xs md:text-base">
