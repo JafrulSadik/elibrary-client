@@ -67,7 +67,7 @@ const NameSect = (props: Props) => {
   }, [change]);
 
   return (
-    <div className="text-base">
+    <div className="text-base w-full">
       <div className="flex items-center gap-2 ">
         <p className="font-semibold my-2">Full Name</p>
         <FaPen
@@ -77,9 +77,9 @@ const NameSect = (props: Props) => {
         />
       </div>
       {!change ? (
-        <p className="p-3 bg-gray-100 rounded-lg text-gray-600 text-sm">
-          {name}
-        </p>
+        <div className="p-3 bg-gray-100 rounded-lg text-gray-600 text-sm truncate">
+          <p>{name}</p>
+        </div>
       ) : (
         <>
           <input

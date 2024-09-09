@@ -12,7 +12,10 @@ import { userRegistration } from "../../../../action/auth-action";
 
 const RegistraionFormSchema = z
   .object({
-    firstName: z.string().min(3, "Name must be at least 3 characters long"),
+    firstName: z
+      .string()
+      .min(3, "Name must be at least 3 characters long")
+      .max(10, "Name can be max 3 characters long."),
     lastName: z.string(),
     email: z.string().min(1, "* Email is requried").email(),
     password: z

@@ -240,7 +240,7 @@ const UploadBookForm = () => {
           }`}
         >
           {loading && <RiLoader2Line className="animate-spin" size={16} />}
-          <span>Upload Image</span>
+          <span>Add Book</span>
         </button>
       </div>
     </form>

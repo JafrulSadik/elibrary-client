@@ -73,11 +73,10 @@ export const updateUser = async (formData: FormData) => {
   }
 
   try {
-    const response = await fetch(`${config.baseUrl}/api/v1/users/`, {
+    const response = await fetch(`${config.baseUrl}/api/v1/users`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${session?.tokens?.accessToken}`,
-        "Content-Type": "multipart/formdata",
       },
       body: formData,
     });

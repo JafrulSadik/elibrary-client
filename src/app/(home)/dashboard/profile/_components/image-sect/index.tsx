@@ -113,7 +113,7 @@ const ImageSect = (props: Props) => {
           className="flex justify-center items-center gap-1 px-6 py-2 my-2 text-white  rounded-md bg-black hover:bg-[#242424]"
         >
           {loading && <RiLoader2Line className="animate-spin" size={16} />}
-          <span>Add book</span>
+          <span>Upload Image</span>
         </button>
       )}
     </div>

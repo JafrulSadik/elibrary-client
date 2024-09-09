@@ -31,12 +31,22 @@ const page = async ({
       <hr className="h-[0.5] my-3 bg-gray-300 w-full" />
 
       <div className="flex flex-col gap-3 w-full">
-        {data && data.map((book) => <BookCard key={book?._id} book={book} />)}
+        {data.length ? (
+          data.map((book) => <BookCard key={book?._id} book={book} />)
+        ) : (
+          <div className="flex justify-center items-center min-h-[60vh]">
+            No books found!
+          </div>
+        )}
       </div>
 
-      <div className="mt-8 flex justify-center">
-        {data.length ? <PaginationSect pageCount={pagination.totalPage} /> : ""}
-      </div>
+      {data.length ? (
+        <div className="flex justify-center">
+          <PaginationSect pageCount={pagination.totalPage} />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
