@@ -5,11 +5,10 @@ import { deleteBook } from "../../../../../action/book-action";
 
 type Props = {
   bookId: string;
-  fetchData: Function;
 };
 
 const DeleteBtn = (props: Props) => {
-  const { bookId, fetchData } = props;
+  const { bookId } = props;
   const [loading, setLoading] = useState(false);
 
   const handleDelete = async ({ bookId }: { bookId: string }) => {
@@ -35,7 +34,6 @@ const DeleteBtn = (props: Props) => {
       });
     }
     setLoading(false);
-    fetchData({ page: 1 });
   };
 
   return (

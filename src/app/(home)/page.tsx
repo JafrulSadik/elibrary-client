@@ -33,7 +33,7 @@ export default async function Home() {
       {/* Top writers */}
       <Suspense
         fallback={
-          <div className="flex justify-center items-center h-64 bg-crusta-950">
+          <div className="flex justify-center items-center h-64 bg-crusta-950 w-full">
             <p className="text-white">Loading...</p>
           </div>
         }

@@ -77,6 +77,7 @@ export const updateUser = async (formData: FormData) => {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${session?.tokens?.accessToken}`,
+        "Content-Type": "multipart/formdata",
       },
       body: formData,
     });

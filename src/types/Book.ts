@@ -32,6 +32,8 @@ export type PaginationType = {
 
 export type GetUserBooksProps = {
   page: number;
+  searchBy?: string;
+  search?: string;
 };
 
 export type GetBooksProps = {
@@ -42,12 +44,12 @@ export type GetBooksProps = {
 };
 
 export type Reviews = {
+  _id: string;
   bookId: string;
   authorId: User;
   profileImg?: string;
   rating?: number;
   comment?: string;
-  _id: string;
   createdAt: Date;
   updatedAt: Date;
 };

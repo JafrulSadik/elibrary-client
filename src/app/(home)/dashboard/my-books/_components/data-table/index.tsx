@@ -6,15 +6,10 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Pagination from "../../../../../../components/pagination";
-import { ApiSuccessfullResponse } from "../../../../../../types/ApiResponse";
-import {
-  Book,
-  GetUserBooksProps,
-  PaginationType,
-} from "../../../../../../types/Book";
-import { getUserBooks } from "../../../../../action/book-action";
+import useUserBooks from "../../../../../../hooks/userUserBooks";
+import { Book } from "../../../../../../types/Book";
 import DeleteBtn from "../delete-btn";
 
 type ColumnType = Pick<
@@ -24,33 +19,24 @@ type ColumnType = Pick<
 
 const columnHelper = createColumnHelper<ColumnType>();
 
-const DataTable = () => {
+type Props = {
+  search: string;
+  searchBy: "title" | "bookId" | "genre";
+};
+
+const DataTable = (props: Props) => {
+  const { search, searchBy } = props;
   const [page, setPage] = useState<number>(1);
-  const [data, setData] = useState<Book[]>([]);
-  const [loading, setLoading] = useState(false);
   const [totalPage, setTotalPage] = useState(0);
-
-  const fetchData = async (props: GetUserBooksProps) => {
-    const { page } = props;
-    setLoading(true);
-    const response = (await getUserBooks({ page })) as ApiSuccessfullResponse<
-      Book,
-      PaginationType
-    >;
-
-    const { data, pagination } = response;
-    setData(data);
-    setTotalPage(pagination.totalPage);
-    setLoading(false);
-  };
+  const { data, loading, error } = useUserBooks({
+    page,
+    search,
+    searchBy,
+  });
 
   const handlePageNumber = ({ selected }: { selected: number }) => {
     setPage(selected + 1);
   };
-
-  useEffect(() => {
-    fetchData({ page });
-  }, [page]);
 
   const columns = [
     columnHelper.accessor("cover", {
@@ -108,7 +94,7 @@ const DataTable = () => {
             <button className="px-3 py-1 bg-slate-100 border border-gray-200 shadow-sm rounded-md hover:border-gray-300">
               Update
             </button>
-            <DeleteBtn bookId={info.getValue()} fetchData={fetchData} />
+            <DeleteBtn bookId={info.getValue()} />
           </div>
         );
       },
@@ -161,10 +147,16 @@ const DataTable = () => {
               ))}
             </tbody>
           </table>
-          {!data.length && (
+          {loading ? (
             <div className="min-w-[500px] flex justify-center items-center h-[30vh]">
-              <p className="text-sm">No books found!</p>
+              <p className="text-sm">Loading...</p>
             </div>
+          ) : (
+            !data.length && (
+              <div className="min-w-[500px] flex justify-center items-center h-[30vh]">
+                <p className="text-sm">No books found!</p>
+              </div>
+            )
           )}
         </div>
       </div>

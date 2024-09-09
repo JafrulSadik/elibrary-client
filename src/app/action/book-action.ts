@@ -66,7 +66,7 @@ export const createBook = async (formData: FormData) => {
 };
 
 export const getUserBooks = async (props: GetUserBooksProps) => {
-  const { page } = props;
+  const { page, searchBy, search } = props;
   const session = await auth();
 
   if (!session.isAuthenticated) {
@@ -75,7 +75,7 @@ export const getUserBooks = async (props: GetUserBooksProps) => {
 
   try {
     const response = await fetch(
-      `${config.baseUrl}/api/v1/users/${session?.user?.id}/all-books?limit=5&page=${page}`,
+      `${config.baseUrl}/api/v1/users/${session?.user?.id}/all-books?limit=5&page=${page}&search_by=${searchBy}&search=${search}`,
       {
         headers: {
           Authorization: session?.tokens?.accessToken || "",
