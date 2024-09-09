@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { BiSolidCategory } from "react-icons/bi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Card from "../../../../components/card";
+import HomeCardSkeleton from "../../../../skeletons/home-card-skeleton/HomeCardSkeleton";
 import {
   ApiResponseArryData,
   ApiSuccessfullResponse,
@@ -101,9 +102,42 @@ const CategorySect = () => {
           </div>
 
           {loading ? (
-            <div className="flex justify-center items-center h-64">
+            <>
+              {/* <div className="flex justify-center items-center h-64">
               <p>Loading...</p>
-            </div>
+            </div> */}
+              <div className="w-full">
+                <Swiper
+                  slidesPerView={1}
+                  breakpoints={{
+                    320: {
+                      slidesPerView: 2,
+                    },
+                    500: {
+                      slidesPerView: 3,
+                      spaceBetween: 30,
+                    },
+                    860: {
+                      slidesPerView: 4,
+                      spaceBetween: 30,
+                    },
+                    1200: {
+                      slidesPerView: 5,
+                      spaceBetween: 30,
+                    },
+                  }}
+                  spaceBetween={5}
+                >
+                  {Array(5)
+                    .fill(0)
+                    .map((item, index) => (
+                      <SwiperSlide className="md:px-5" key={index}>
+                        <HomeCardSkeleton />
+                      </SwiperSlide>
+                    ))}
+                </Swiper>
+              </div>
+            </>
           ) : books.length ? (
             <div className="w-full">
               <Swiper

@@ -54,7 +54,7 @@ const TopWriters = () => {
                   type="checkbox"
                   className="accent-peace-400 "
                 />
-                <p>{author.name}</p>
+                <p className="max-w-40 truncate">{author.name}</p>
               </div>
               <hr className="bg-gray-300 h-[0.5px] my-1" />
             </div>

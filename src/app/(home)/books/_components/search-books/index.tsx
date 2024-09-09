@@ -16,7 +16,7 @@ const SearchBooks = () => {
   const searchParams = useSearchParams();
   const [data, setData] = useState<Book[]>([]);
   const [totalPage, setTotalPage] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handleSortBy = (sortby: string) => {
     const params = new URLSearchParams(searchParams);
@@ -83,7 +83,7 @@ const SearchBooks = () => {
         </div>
         {/* All Books */}
         <div className="w-full lg:flex-[0.8] ">
-          <AllBooks books={data} />
+          <AllBooks books={data} loading={loading} />
 
           {/* Pagination */}
           <div className="flex justify-around mt-8">
